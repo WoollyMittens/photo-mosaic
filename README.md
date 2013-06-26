@@ -39,9 +39,13 @@ useful.photowall.start(parent, {
 ```
 
 **id : {string}** - The ID attribute of an element somewhere in the document.
+
 **parent : {DOM node}** - The DOM element around which the functionality is centred.
+
 **'row' : {integer}** - Average height of rows in pixels.
+
 **'orphans' : {integer}** - Amount of orphaned thumbnails to allow on the last line.
+
 **'slice' : {string}** - Optional web-service for resizing images. An example is provided as *./php/imageslice.php*.
 
 ### Using document.querySelectorAll
@@ -61,7 +65,9 @@ useful.css.select({
 ```
 
 **rule : {string}** - The CSS Rule for the intended target(s) of the script.
+
 **handler : {function}** - The public function that starts the script.
+
 **data : {object}** - Name-value pairs with configuration data.
 
 ### Using jQuery
