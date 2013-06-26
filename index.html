@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>useful.photowall.js: Photo Wall</title>
+		<style>
+			html { font-family:Sans-Serif; font-size:75%; height:100%; }
+			body { _height:100%; line-height:180%; margin:0; min-height:100%; padding:0; }
+			.padded { padding:2em; }
+		</style>
+		<!--[if lte IE 9]>
+			<meta http-equiv="imagetoolbar" content="no"/>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<section class="example leftExample clearfix">
+			<article class="example">
+				<h2>Photo Wall</h2>
+				<p>The script arranges collections of images into a brick pattern.</p>
+				<p><a class="button downloadButton" href="http://www.woollymittens.nl/downloads/photowall.zip" target="_blank">Download</a></p>
+			</article>
+			<aside class="example">
+
+				<!-- Cut below this -->
+				<style>@import url("./css/photowall.css")</style>
+				<script src="./js/useful.photowall.js"></script>
+				<figure class="photowall">
+					<ul>
+						<li><a href="./img/photo_0a.jpg"><img alt="" src="./img/photo_0.jpg"/></a></li>
+						<li><a href="./img/photo_1a.jpg"><img alt="" src="./img/photo_1.jpg"/></a></li>
+						<li><a href="./img/photo_2a.jpg"><img alt="" src="./img/photo_2.jpg"/></a></li>
+						<li><a href="./img/photo_3a.jpg"><img alt="" src="./img/photo_3.jpg"/></a></li>
+						<li><a href="./img/photo_4a.jpg"><img alt="" src="./img/photo_4.jpg"/></a></li>
+						<li><a href="./img/photo_5a.jpg"><img alt="" src="./img/photo_5.jpg"/></a></li>
+						<li><a href="./img/photo_6a.jpg"><img alt="" src="./img/photo_6.jpg"/></a></li>
+						<li><a href="./img/photo_7a.jpg"><img alt="" src="./img/photo_7.jpg"/></a></li>
+						<li><a href="./img/photo_8a.jpg"><img alt="" src="./img/photo_8.jpg"/></a></li>
+						<li><a href="./img/photo_9a.jpg"><img alt="" src="./img/photo_9.jpg"/></a></li>
+					</ul>
+				</figure>
+				<script>
+				//<!--
+					useful.css.select({
+						rule : 'figure.photowall',
+						handler : useful.photowall.start,
+						data : {
+							// average height of rows
+							'row' : 150,
+							// amount of orphaned thumbnails to allow on the last line
+							'orphans' : 2,
+							// optional webservice for resizing images
+							'slice' : './php/imageslice.php?src=../{src}&width={width}&height={height}'
+						}
+					});
+				//-->
+				</script>
+				<!-- Cut above this -->
+
+			</aside>
+		</section>
+	</body>
+</html>
