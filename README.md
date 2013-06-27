@@ -2,6 +2,8 @@
 
 The script arranges collections of images into a brick pattern.
 
+Try the <a href="http://www.woollymittens.nl/useful/default.php?url=photowall">photowall demo</a>.
+
 ## How to use the script
 
 The stylesheet is best included in the header of the document.
