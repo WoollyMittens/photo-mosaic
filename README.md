@@ -36,7 +36,9 @@ var parent = documentGetElementById('id');
 useful.photowall.start(parent, {
 	'row' : 150,
 	'orphans' : 2,
-	'slice' : './php/imageslice.php?src=../{src}&width={width}&height={height}'
+	'slice' : './php/imageslice.php?src=../{src}&width={width}&height={height}',
+	'opened' : function (image, link) {},
+	'closed' : function () {}
 });
 ```
 
@@ -49,6 +51,10 @@ useful.photowall.start(parent, {
 **'orphans' : {integer}** - Amount of orphaned thumbnails to allow on the last line.
 
 **'slice' : {string}** - Optional web-service for resizing images. An example is provided as *./php/imageslice.php*.
+
+**'opened' : {function}** - A function to call when an image is opened. The image's and link's DOM objects are passed to it.
+
+**'closed' : {function}** - A function to call then an image is closed.
 
 ### Using document.querySelectorAll
 

@@ -145,6 +145,10 @@
 			close : function (settings) {
 				// if there is a popup
 				if (settings.popup) {
+					// trigger the opened event if available
+					if (settings.closed !== null) {
+						settings.closed();
+					}
 					// unreveal the popup
 					settings.popup.className = settings.popup.className.replace(/-active/gi, '-passive');
 					// and after a while
@@ -208,6 +212,10 @@
 			},
 			clicked : function (index, settings) {
 				settings.images.objects[index].onclick = function () {
+					// trigger the opened event if available
+					if (settings.opened !== null) {
+						settings.opened(settings.images.objects[index], settings.images.links[index]);
+					}
 					// open the popup
 					photowall.details.show(index, settings);
 					// cancel the click
