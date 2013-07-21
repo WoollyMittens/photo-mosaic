@@ -37,6 +37,7 @@ useful.photowall.start(parent, {
 	'row' : 150,
 	'orphans' : 2,
 	'slice' : './php/imageslice.php?src=../{src}&width={width}&height={height}',
+	'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
 	'opened' : function (image, link) {},
 	'closed' : function () {}
 });
@@ -51,6 +52,8 @@ useful.photowall.start(parent, {
 **'orphans' : {integer}** - Amount of orphaned thumbnails to allow on the last line.
 
 **'slice' : {string}** - Optional web-service for resizing images. An example is provided as *./php/imageslice.php*.
+
+**'fallback' : {boolean}** - Use pixels instead of percentages in emergencies.
 
 **'opened' : {function}** - A function to call when an image is opened. The image's and link's DOM objects are passed to it.
 
