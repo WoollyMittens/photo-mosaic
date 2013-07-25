@@ -14,6 +14,11 @@
     	busy spinner
     */
   }
+  .photowall * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
   .photowall ul {
     -webkit-overflow-scrolling: touch;
     display: block;
@@ -33,7 +38,7 @@
     height: 128px;
     width: auto;
     border: solid 1px #fff;
-    margin: 0 -2px -2px 0;
+    margin: 0 -2px -3px 0;
     vertical-align: top;
   }
   .photowall .photowall-detail {
