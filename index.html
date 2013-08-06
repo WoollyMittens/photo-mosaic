@@ -54,8 +54,10 @@
 							'row' : 150,
 							// amount of orphaned thumbnails to allow on the last line
 							'orphans' : 0,
+							// use the maximum amount of screen space available for the photo
+							'maximise' : true,
 							// optional webservice for resizing images
-							'slice' : './php/imageslice.php?src=../{src}&width={width}&height={height}',
+							'slice' : './php/imageslice.php?src=../{src}&{size}',
 							// use pixels instead of percentages in emergencies
 							'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
 							// function to call when an image is opened

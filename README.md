@@ -18,7 +18,7 @@ This include can be added to the header or placed inline before the script is in
 <script src="./js/useful.photowall.js"></script>
 ```
 
-To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5.js*. To provide an alternative for *document.querySelectorAll* in Internet Explorer 8 and lower, include *jQuery*.
+To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5.js*. To provide an alternative for *document.querySelectorAll* and CSS3 animations in Internet Explorer 8 and lower, include *jQuery*.
 
 ```html
 <!--[if lte IE 9]>
@@ -36,7 +36,8 @@ var parent = documentGetElementById('id');
 useful.photowall.start(parent, {
 	'row' : 150,
 	'orphans' : 2,
-	'slice' : './php/imageslice.php?src=../{src}&width={width}&height={height}',
+	'maximise' : false,
+	'slice' : './php/imageslice.php?src=../{src}&{size}',
 	'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
 	'opened' : function (image, link) {},
 	'closed' : function () {}
@@ -50,6 +51,8 @@ useful.photowall.start(parent, {
 **'row' : {integer}** - Average height of rows in pixels.
 
 **'orphans' : {integer}** - Amount of orphaned thumbnails to allow on the last line.
+
+**'maximise' : {boolean}** - If true, creates a popup the size of the entire window for the photos.
 
 **'slice' : {string}** - Optional web-service for resizing images. An example is provided as *./php/imageslice.php*.
 
