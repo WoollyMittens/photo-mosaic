@@ -29,7 +29,7 @@
 
 				<!-- Cut below this -->
 				<style>@import url("./css/photowall.css")</style>
-				<script src="./js/useful.photowall.js"></script>
+				<script src="./js/photowall.min.js"></script>
 				<figure class="photowall" id="photowall">
 					<ul>
 						<li><a href="./img/photo_0a.jpg"><img alt="" src="./img/photo_0.jpg"/></a></li>
@@ -46,26 +46,23 @@
 				</figure>
 				<script>
 				//<!--
-					useful.css.select({
-						rule : '#photowall',
-						handler : useful.photowall.start,
-						data : {
-							// average height of rows
-							'row' : 150,
-							// amount of orphaned thumbnails to allow on the last line
-							'orphans' : 0,
-							// use the maximum amount of screen space available for the photo
-							'maximise' : true,
-							// optional webservice for resizing images
-							'slice' : './php/imageslice.php?src=../{src}&{size}',
-							// use pixels instead of percentages in emergencies
-							'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
-							// function to call when an image is opened
-							'opened' : function (image, link) {},
-							// function to call then an image is closed
-							'closed' : function () {}
-						}
+					var photowall = new useful.Photowall( document.getElementById('photowall'), {
+						// average height of rows
+						'row' : 150,
+						// amount of orphaned thumbnails to allow on the last line
+						'orphans' : 0,
+						// use the maximum amount of screen space available for the photo
+						'maximise' : true,
+						// optional webservice for resizing images
+						'slice' : './php/imageslice.php?src=../{src}&{size}',
+						// use pixels instead of percentages in emergencies
+						'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
+						// function to call when an image is opened
+						'opened' : function (image, link) {},
+						// function to call then an image is closed
+						'closed' : function () {}
 					});
+					photowall.start();
 				//-->
 				</script>
 				<!-- Cut above this -->

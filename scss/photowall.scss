@@ -2,8 +2,12 @@
 	Example Styling for a Photo Wall
 */
 @media all {
+
 	@import "compass/css3";
 	@import "compass/utilities";
+	@import "definitions";
+	@import "buttons";
+
 	.photowall {
 		margin : 0;
 		padding : 0;
