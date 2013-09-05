@@ -2,7 +2,7 @@
 
 The script arranges collections of images into a brick pattern.
 
-Try the <a href="http://www.woollymittens.nl/useful/default.php?url=photowall">demo</a>.
+Try the <a href="http://www.woollymittens.nl/useful/default.php?url=useful-photowall">demo</a>.
 
 ## How to use the script
 
