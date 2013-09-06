@@ -11,10 +11,14 @@
   .photowall {
     margin: 0;
     padding: 0;
+    overflow: hidden;
     position: relative;
     width: 100%;
     /*
-    	popup
+    	photowall bricks
+    */
+    /*
+    	photowall popup
     */
     /*
     	busy spinner
@@ -26,21 +30,25 @@
     box-sizing: border-box;
     -ms-interpolation-mode: bicubic;
   }
-  .photowall ul {
+  .photowall div.photowall-bricks {
     -webkit-overflow-scrolling: touch;
-    display: block;
-    margin: 0;
     max-height: 320px;
     overflow: hidden;
     overflow-y: auto;
-    padding: 0 0 2px 0;
+    width: 100%;
   }
-  .photowall ul li {
+  .photowall div.photowall-bricks ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 102%;
+  }
+  .photowall div.photowall-bricks ul li {
     display: inline;
     margin: 0;
     padding: 0;
   }
-  .photowall a img {
+  .photowall div.photowall-bricks a img {
     display: inline-block;
     height: 128px;
     width: auto;
@@ -66,24 +74,28 @@
     z-index: 20000;
   }
   .photowall .photowall-detail .photowall-closer {
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    background: #333;
-    border-radius: 50% 50%;
-    border: solid 2px #fff;
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 48px;
+    line-height: 3rem;
+    width: 48px;
+    width: 3rem;
+    height: 48px;
+    height: 3rem;
+    right: 16px;
+    right: 1rem;
+    top: 16px;
+    top: 1rem;
+    background: #ff6a00;
     color: #fff;
     cursor: pointer;
-    font-size: 17px;
     font-weight: bold;
     position: absolute;
-    line-height: 16px;
-    right: 10px;
     text-align: center;
     text-decoration: none;
-    top: 10px;
-    width: 24px;
-    height: 24px;
+  }
+  .photowall .photowall-detail .photowall-closer:hover {
+    background: #ff9800;
   }
   .photowall .photowall-detail-maximise {
     position: fixed;

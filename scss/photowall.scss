@@ -11,39 +11,52 @@
 	.photowall {
 		margin : 0;
 		padding : 0;
+		overflow : hidden;
 		position : relative;
 		width : 100%;
 		* {
 			@include box-sizing(border-box);
 			-ms-interpolation-mode: bicubic;
 		}
-		ul {
-			-webkit-overflow-scrolling: touch;
-			display : block;
-			margin : 0;
+
+		/*
+			photowall bricks
+		*/
+
+		div.photowall-bricks {
+			-webkit-overflow-scrolling : touch;
 			max-height : 320px;
 			overflow : hidden;
 			overflow-y : auto;
-			padding : 0 0 2px 0;
-			li {
-				display : inline;
+			width : 100%;
+			ul {
+				display : block;
 				margin : 0;
 				padding : 0;
+				width : 102%;
+				li {
+					display : inline;
+					margin : 0;
+					padding : 0;
+				}
 			}
-		}
-		a {
-			img {
-				display : inline-block;
-				height : 128px;
-				width : auto;
-				border : solid 1px #fff;
-				margin : 0 -2px -3px 0;
-				vertical-align : top;
+			a {
+				img {
+					display : inline-block;
+					height : 128px;
+					width : auto;
+					border : solid 1px #fff;
+					margin : 0 -2px -3px 0;
+					vertical-align : top;
+				}
 			}
+
 		}
+
 		/*
-			popup
+			photowall popup
 		*/
+
 		.photowall-detail {
 			@include transition(opacity ease 500ms);
 			-webkit-transition : -webkit-opacity ease 500ms;
@@ -58,22 +71,22 @@
 			z-index : 20000;
 			.photowall-image {}
 			.photowall-closer {
-				@include box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
-				background : #333;
-				border-radius : 50% 50%;
-				border : solid 2px #fff;
+				@include rem('font-size', 1.5);
+				@include rem('line-height', 3);
+				@include rem('width', 3);
+				@include rem('height', 3);
+				@include rem('right', 1);
+				@include rem('top', 1);
+				background : $color-passive;
 				color : #fff;
 				cursor : pointer;
-				font-size : 17px;
 				font-weight : bold;
 				position : absolute;
-				line-height : 16px;
-				right : 10px;
 				text-align : center;
 				text-decoration : none;
-				top : 10px;
-				width : 24px;
-				height : 24px;
+				&:hover {
+					background : $color-hover;
+				}
 			}
 		}
 		.photowall-detail-maximise {
@@ -89,9 +102,11 @@
 			-webkit-opacity : 1;
 			visibility : visible\9;
 		}
+
 		/*
 			busy spinner
 		*/
+
 		.photowall-busy {
 			border-radius : 5px;
 			opacity : 0.8;

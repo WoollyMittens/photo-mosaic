@@ -46,7 +46,7 @@
 		};
 		this.prepare = function (context) {
 			// remove the white space
-			context.obj.innerHTML = context.obj.innerHTML.replace(/\t|\r|\n/g, '');
+			context.obj.innerHTML = '<div class="photowall-bricks">' + context.obj.innerHTML.replace(/\t|\r|\n/g, '') + '</div>';
 			// measure the container
 			context.cfg.col = context.obj.offsetWidth;
 			context.cfg.aspect = context.cfg.height / context.cfg.col;
@@ -83,7 +83,7 @@
 				// add the image
 				context.details.addImage(index, context);
 				// show the popup
-				//context.details.open(context);
+				//context.details.onOpen(context);
 			}
 		};
 		this.details.addImage = function (index, context) {
@@ -102,7 +102,7 @@
 			image = document.createElement('img');
 			image.className = 'photowall-image';
 			image.setAttribute('alt', imageCaption);
-			image.onload = context.details.open(context);
+			image.onload = context.details.onOpen(context);
 			// add the image to the popup
 			context.cfg.popup.appendChild(image);
 			// load the image
@@ -118,11 +118,11 @@
 			closer.innerHTML = 'x';
 			closer.href = '#close';
 			// add the close event handler
-			closer.onclick = context.details.close(context);
+			closer.onclick = context.details.onClose(context);
 			// add the close gadget to the image
 			context.cfg.popup.appendChild(closer);
 		};
-		this.details.open = function (context) {
+		this.details.onOpen = function (context) {
 			return function () {
 				var image;
 				// if there is a popup
@@ -137,7 +137,7 @@
 				}
 			};
 		};
-		this.details.close = function (context) {
+		this.details.onClose = function (context) {
 			return function () {
 				// if there is a popup
 				if (context.cfg.popup) {
