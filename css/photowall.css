@@ -61,7 +61,7 @@
     margin: 0;
     padding: 0;
   }
-  .photowall ul li a img {
+  .photowall ul li img {
     display: inline-block;
     height: 128px;
     width: auto;
