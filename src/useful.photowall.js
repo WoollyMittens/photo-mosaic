@@ -1,12 +1,9 @@
 /*
 	Source:
-	van Creij, Maurice (2012). "useful.context.js: Simple photo wall", version 20120606, http://www.woollymittens.nl/.
+	van Creij, Maurice (2012). "useful.photowall.js: Simple photo wall", version 20120606, http://www.woollymittens.nl/.
 
 	License:
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
-
-	Prerequisites:
-	<script src="./js/useful.js"></script>
 */
 
 (function (useful) {
