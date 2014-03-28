@@ -40,6 +40,8 @@
 					context.thumbnails.redraw(context);
 				}
 			}, 500);
+			// disable the start function so it can't be started twice
+			this.start = function () {};
 		};
 		this.prepare = function (context) {
 			// remove the white space
@@ -246,6 +248,8 @@
 			var context = this;
 			context.details.show(index, context);
 		};
+		// go
+		this.start();
 	};
 
 }(window.useful = window.useful || {}));
