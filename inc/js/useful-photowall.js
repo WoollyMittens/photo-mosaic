@@ -168,207 +168,229 @@
 	"use strict";
 
 	// private functions
-	useful.Photowall = function (obj, cfg) {
+	useful.PhotowallBusy = function (parent) {
 		// properties
-		this.obj = obj;
-		this.cfg = cfg;
+		this.parent = parent;
+		this.spinner = null;
 		// methods
-		this.start = function () {
-			var context = this;
-			// communicate the initial state
-			context.obj.className += ' photowall-passive';
-			// store the images
-			context.cfg.images = {};
-			context.cfg.images.links = context.obj.getElementsByTagName('a');
-			context.cfg.images.objects = context.obj.getElementsByTagName('img');
-			// prepare the contents
-			context.prepare(context);
+		this.build = function () {
 			// construct the spinner
-			context.busy.build(context);
-			// check every once in a while to see if the image dimensions are known yet
-			context.cfg.wait = setInterval(function () {
-				if (context.thumbnails.complete(context)) {
-					// cancel the checking
-					clearTimeout(context.cfg.wait);
-					// measure the dimensions
-					context.thumbnails.measure(context);
-					// construct the wall
-					context.thumbnails.redraw(context);
-				}
-			}, 500);
-			// disable the start function so it can't be started twice
-			this.start = function () {};
+			this.spinner = document.createElement('div');
+			this.spinner.className = 'photowall-busy photowall-busy-passive';
+			this.parent.obj.appendChild(this.spinner);
 		};
-		this.prepare = function (context) {
-			// remove the white space
-			context.obj.innerHTML = '<div class="photowall-bricks">' + context.obj.innerHTML.replace(/\t|\r|\n/g, '') + '</div>';
-			// measure the container
-			context.cfg.col = context.obj.offsetWidth;
-			context.cfg.aspect = context.cfg.height / context.cfg.col;
-		};
-		this.busy = {};
-		this.busy.build = function (context) {
-			// construct the spinner
-			context.cfg.spinner = document.createElement('div');
-			context.cfg.spinner.className = 'photowall-busy photowall-busy-passive';
-			context.obj.appendChild(context.cfg.spinner);
-		};
-		this.busy.show = function (context) {
+		this.show = function () {
 			// show the spinner
-			context.cfg.spinner.className = context.cfg.spinner.className.replace(/-passive/gi, '-active');
+			this.spinner.className = this.spinner.className.replace(/-passive/gi, '-active');
 		};
-		this.busy.hide = function (context) {
+		this.hide = function () {
 			// hide the spinner
-			context.cfg.spinner.className = context.cfg.spinner.className.replace(/-active/gi, '-passive');
+			this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');
 		};
-		this.details = {};
-		this.details.show = function (index, context) {
+		// go
+		this.build();
+	};
+
+}(window.useful = window.useful || {}));
+
+/*
+	Source:
+	van Creij, Maurice (2012). "useful.photowall.js: Simple photo wall", version 20120606, http://www.woollymittens.nl/.
+
+	License:
+	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+*/
+
+(function (useful) {
+
+	// invoke strict mode
+	"use strict";
+
+	// private functions
+	useful.PhotowallDetails = function (parent) {
+		// properties
+		this.parent = parent;
+		this.popup = null;
+		// methods
+		this.show = function (index) {
+			var parent = this.parent, cfg = this.parent.cfg;
 			// if the popup doesn't exist
-			if (!context.cfg.popup) {
+			if (!this.popup) {
 				// show the busy indicator
-				context.busy.show(context);
+				parent.busy.show();
 				// create a container for the popup
-				context.cfg.popup = document.createElement('div');
-				context.cfg.popup.className = 'photowall-detail photowall-detail-passive';
-				context.cfg.popup.className += (context.cfg.maximise) ? ' photowall-detail-maximise' : '';
+				this.popup = document.createElement('div');
+				this.popup.className = 'photowall-detail photowall-detail-passive';
+				this.popup.className += (cfg.maximise) ? ' photowall-detail-maximise' : '';
 				// add a close gadget
-				context.details.addCloser(context);
+				this.addCloser();
 				// add the popup to the parent
-				context.obj.appendChild(context.cfg.popup);
+				parent.obj.appendChild(this.popup);
 				// add the image
-				context.details.addImage(index, context);
-				// show the popup
-				//context.details.onOpen(context);
+				this.addImage(index);
 			}
 		};
-		this.details.addImage = function (index, context) {
-			var popupWidth, popupHeight, popupAspect, image, imageSrc, imageSize, imageCaption;
+		this.addImage = function (index) {
+			var parent = this.parent, cfg = this.parent.cfg,
+				popupWidth, popupHeight, popupAspect, image, imageSrc, imageSize, imageCaption,
+				imageAspect = cfg.images.aspects[index];
 			// measure the parent
-			popupWidth = context.cfg.popup.offsetWidth;
-			popupHeight = context.cfg.popup.offsetHeight;
+			popupWidth = this.popup.offsetWidth;
+			popupHeight = this.popup.offsetHeight;
 			popupAspect = popupHeight / popupWidth;
-			// based on the dimensions of the thumbnail, determine the size of the zoomed image
-			imageSize = (context.cfg.images.aspects[index] > popupAspect) ? 'height=' + popupHeight : 'width=' + popupWidth;
 			// get the source of the image
-			imageSrc = context.cfg.images.links[index].getAttribute('href');
+			imageSrc = cfg.images.links[index].getAttribute('href');
 			// get a possible caption
-			imageCaption = context.cfg.images.links[index].getAttribute('title') || context.cfg.images.objects[index].getAttribute('alt');
+			imageCaption = cfg.images.links[index].getAttribute('title') || cfg.images.objects[index].getAttribute('alt');
 			// build the zoomed image
 			image = document.createElement('img');
 			image.className = 'photowall-image';
 			image.setAttribute('alt', imageCaption);
-			image.onload = context.details.onOpen(context);
+			image.onload = this.onOpen();
+			// pick the dimensions based on the aspect ratio
+			if (imageAspect > popupAspect) {
+				image.setAttribute('width', '');
+				image.setAttribute('height', '100%');
+				imageSize = 'height=' + popupHeight;
+			} else {
+				image.setAttribute('width', '100%');
+				image.setAttribute('height', '');
+				imageSize = 'width=' + popupWidth;
+			}
 			// add the image to the popup
-			context.cfg.popup.appendChild(image);
+			this.popup.appendChild(image);
 			// load the image
-			image.src = (context.cfg.slice) ?
-				context.cfg.slice.replace('{src}', imageSrc).replace('{size}', imageSize):
-				context.cfg.images.links[index];
+			image.src = (cfg.slice) ?
+				cfg.slice.replace('{src}', imageSrc).replace('{size}', imageSize):
+				cfg.images.links[index];
 		};
-		this.details.addCloser = function (context) {
-			var closer;
+		this.addCloser = function () {
+			var parent = this.parent, cfg = this.parent.cfg, closer;
 			// build a close gadget
 			closer = document.createElement('a');
 			closer.className = 'photowall-closer';
 			closer.innerHTML = 'x';
 			closer.href = '#close';
 			// add the close event handler
-			closer.onclick = context.details.onClose(context);
+			closer.onclick = this.onClose();
 			// add the close gadget to the image
-			context.cfg.popup.appendChild(closer);
+			this.popup.appendChild(closer);
 		};
-		this.details.onOpen = function (context) {
+		this.onOpen = function () {
+			var context = this;
 			return function () {
-				var image;
+				var image, parent = context.parent, cfg = context.parent.cfg;
 				// if there is a popup
-				if (context.cfg.popup) {
+				if (context.popup) {
 					// hide the busy indicator
-					context.busy.hide(context);
+					parent.busy.hide();
 					// centre the image
-					image = context.cfg.popup.getElementsByTagName('img')[0];
-					image.style.marginTop = Math.round((context.cfg.popup.offsetHeight - image.offsetHeight) / 2) + 'px';
+					image = context.popup.getElementsByTagName('img')[0];
+					image.style.marginTop = Math.round((context.popup.offsetHeight - image.offsetHeight) / 2) + 'px';
 					// reveal it
-					context.cfg.popup.className = context.cfg.popup.className.replace(/-passive/gi, '-active');
+					context.popup.className = context.popup.className.replace(/-passive/gi, '-active');
 				}
 			};
 		};
-		this.details.onClose = function (context) {
+		this.onClose = function () {
+			var context = this;
 			return function () {
+				var parent = context.parent, cfg = context.parent.cfg;
 				// if there is a popup
-				if (context.cfg.popup) {
+				if (context.popup) {
 					// trigger the closed event if available
-					if (context.cfg.closed !== null) {
-						context.cfg.closed();
-					}
+					if (cfg.closed !== null) { cfg.closed(); }
 					// unreveal the popup
-					context.cfg.popup.className = context.cfg.popup.className.replace(/-active/gi, '-passive');
+					context.popup.className = context.popup.className.replace(/-active/gi, '-passive');
 					// and after a while
 					setTimeout(function () {
 						// remove it
-						context.obj.removeChild(context.cfg.popup);
+						parent.obj.removeChild(context.popup);
 						// remove its reference
-						context.cfg.popup = null;
+						context.popup = null;
 					}, 500);
 				}
 				// cancel the click
 				return false;
 			};
 		};
-		this.thumbnails = {};
-		this.thumbnails.complete = function (context) {
-			var a, b, passed = true;
+	};
+
+}(window.useful = window.useful || {}));
+
+/*
+	Source:
+	van Creij, Maurice (2012). "useful.photowall.js: Simple photo wall", version 20120606, http://www.woollymittens.nl/.
+
+	License:
+	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+*/
+
+(function (useful) {
+
+	// invoke strict mode
+	"use strict";
+
+	// private functions
+	useful.PhotowallThumbnails = function (parent) {
+		// properties
+		this.parent = parent;
+		// methods
+		this.complete = function () {
+			var a, b, passed = true, parent = this.parent, cfg = this.parent.cfg;
 			// for all the images
-			for (a = 0 , b = context.cfg.images.objects.length; a < b; a += 1) {
+			for (a = 0 , b = cfg.images.objects.length; a < b; a += 1) {
 				// if any of the images doesn't have a valid height
-				passed = passed && context.cfg.images.objects[a].offsetWidth > 2;
+				passed = passed && cfg.images.objects[a].offsetWidth > 2;
 			}
 			// return the result
 			return passed;
 		};
-		this.thumbnails.measure = function (context) {
-			var a, b;
+		this.measure = function () {
+			var parent = this.parent, cfg = this.parent.cfg, a, b;
 			// for all images
-			context.cfg.images.widths = [];
-			context.cfg.images.heights = [];
-			context.cfg.images.aspects = [];
-			for (a = 0 , b = context.cfg.images.objects.length; a < b; a += 1) {
+			cfg.images.widths = [];
+			cfg.images.heights = [];
+			cfg.images.aspects = [];
+			for (a = 0 , b = cfg.images.objects.length; a < b; a += 1) {
 				// get its dimensions
-				context.cfg.images.widths[a] = context.cfg.images.objects[a].offsetWidth;
-				context.cfg.images.heights[a] = context.cfg.images.objects[a].offsetHeight;
-				context.cfg.images.aspects[a] = context.cfg.images.heights[a] / context.cfg.images.widths[a];
+				cfg.images.widths[a] = cfg.images.objects[a].offsetWidth;
+				cfg.images.heights[a] = cfg.images.objects[a].offsetHeight;
+				cfg.images.aspects[a] = cfg.images.heights[a] / cfg.images.widths[a];
 			}
 		};
-		this.thumbnails.redraw = function (context) {
-			var a, b, last, c, d, compatibilityWidth, proportionalWidth, subtotalWidth = 0, currentRow = [],
-				hasLinks = (context.cfg.images.links.length === context.cfg.images.objects.length);
+		this.redraw = function () {
+			var parent = this.parent, cfg = this.parent.cfg,
+				a, b, last, c, d, compatibilityWidth, proportionalWidth, subtotalWidth = 0, currentRow = [],
+				hasLinks = (cfg.images.links.length === cfg.images.objects.length);
 			// for every image
-			for (a = 0 , b = context.cfg.images.objects.length, last = b - 1; a < b; a += 1) {
+			for (a = 0 , b = cfg.images.objects.length, last = b - 1; a < b; a += 1) {
 				// calculate its width proportional to the given row height
-				proportionalWidth = context.cfg.row / context.cfg.images.aspects[a];
+				proportionalWidth = cfg.row / cfg.images.aspects[a];
 				subtotalWidth += proportionalWidth;
 				// add it to a subtotal array with the image and dimensions
 				currentRow.push({
-					'link' : context.cfg.images.links[a],
-					'object' : context.cfg.images.objects[a],
+					'link' : cfg.images.links[a],
+					'object' : cfg.images.objects[a],
 					'proportionalWidth' : proportionalWidth
 				});
 				// if the subtotal exceeds a row's width
-				if (subtotalWidth >= context.cfg.col || a === last) {
+				if (subtotalWidth >= cfg.col || a === last) {
 					// if the last image sticks out too far, discard it
-				//	if (subtotalWidth - context.cfg.col > proportionalWidth / 2) {
+				//	if (subtotalWidth - cfg.col > proportionalWidth / 2) {
 				//		currentRow.length -= 1;
 				//		subtotalWidth -= proportionalWidth;
 				//		a -= 1;
 				//	}
 					// if this is the last row and it has less orphans than allowed
-					if (a === last && currentRow.length <= context.cfg.orphans) {
-						subtotalWidth = context.cfg.col;
+					if (a === last && currentRow.length <= cfg.orphans) {
+						subtotalWidth = cfg.col;
 					}
 					// for all the entries in the subtotal array
 					for (c = 0 , d = currentRow.length; c < d; c += 1) {
 						// convert the estimated width to a % of the row of pixels for older browsers
-						compatibilityWidth = (context.cfg.fallback) ?
-							Math.round(currentRow[c].proportionalWidth / subtotalWidth * (context.cfg.col - 18))  + 'px':
+						compatibilityWidth = (cfg.fallback) ?
+							Math.round(currentRow[c].proportionalWidth / subtotalWidth * (cfg.col - 18))  + 'px':
 							(currentRow[c].proportionalWidth / subtotalWidth * 100)  + '%';
 						// apply the new size context
 						currentRow[c].object.style.width = compatibilityWidth;
@@ -379,30 +401,90 @@
 					subtotalWidth = 0;
 				}
 				// add an event handler to the link if there is one
-				if (hasLinks) { context.cfg.images.links[a].onclick = context.thumbnails.clicked(a, context); }
+				if (hasLinks) { cfg.images.links[a].onclick = this.clicked(a); }
 			}
 			// communicate the active state
-			context.obj.className = context.obj.className.replace('-passive', '-active');
+			parent.obj.className = parent.obj.className.replace('-passive', '-active');
 		};
-		this.thumbnails.clicked = function (index, context) {
-			return function () {
-				var allowedToOpen;
+		this.clicked = function (index) {
+			var context = this;
+			return function (event) {
+				var parent = context.parent, cfg = context.parent.cfg, allowedToOpen;
+				// cancel the click
+				event.preventDefault();
 				// trigger the opened event if available
-				if (context.cfg.opened !== null) {
+				if (cfg.opened !== null) {
 					// catch the reply from the opened event
-					allowedToOpen = context.cfg.opened(context.cfg.images.objects[index], context.cfg.images.links[index]);
+					allowedToOpen = cfg.opened(cfg.images.objects[index], cfg.images.links[index]);
 				}
 				// open the popup, if there was no reply or a positive reply
 				if (typeof(allowedToOpen) === 'undefined' || allowedToOpen === null || allowedToOpen) {
-					context.details.show(index, context);
+					parent.details.show(index);
 				}
-				// cancel the click
-				return false;
 			};
 		};
-		this.focus = function (index) {
+	};
+
+}(window.useful = window.useful || {}));
+
+/*
+	Source:
+	van Creij, Maurice (2012). "useful.photowall.js: Simple photo wall", version 20120606, http://www.woollymittens.nl/.
+
+	License:
+	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+*/
+
+(function (useful) {
+
+	// invoke strict mode
+	"use strict";
+
+	// private functions
+	useful.Photowall = function (obj, cfg) {
+		// properties
+		this.obj = obj;
+		this.cfg = cfg;
+		// methods
+		this.start = function () {
 			var context = this;
-			context.details.show(index, context);
+			// create the component parts
+			this.busy = new useful.PhotowallBusy(this);
+			this.details = new useful.PhotowallDetails(this);
+			this.thumbnails = new useful.PhotowallThumbnails(this);
+			// communicate the initial state
+			this.obj.className += ' photowall-passive';
+			// store the images
+			this.cfg.images = {};
+			this.cfg.images.links = this.obj.getElementsByTagName('a');
+			this.cfg.images.objects = this.obj.getElementsByTagName('img');
+			// prepare the contents
+			this.prepare(this);
+			// construct the spinner
+			this.busy.build(this);
+			// check every once in a while to see if the image dimensions are known yet
+			this.cfg.wait = setInterval(function () {
+				if (context.thumbnails.complete()) {
+					// cancel the checking
+					clearTimeout(context.cfg.wait);
+					// measure the dimensions
+					context.thumbnails.measure();
+					// construct the wall
+					context.thumbnails.redraw();
+				}
+			}, 500);
+			// disable the start function so it can't be started twice
+			this.start = function () {};
+		};
+		this.prepare = function () {
+			// remove the white space
+			this.obj.innerHTML = '<div class="photowall-bricks">' + this.obj.innerHTML.replace(/\t|\r|\n/g, '') + '</div>';
+			// measure the container
+			this.cfg.col = this.obj.offsetWidth;
+			this.cfg.aspect = this.cfg.height / this.cfg.col;
+		};
+		this.focus = function (index) {
+			this.details.show(index);
 		};
 		// go
 		this.start();

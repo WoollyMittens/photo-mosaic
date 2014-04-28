@@ -58,9 +58,9 @@
 						// use pixels instead of percentages in emergencies
 						'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
 						// function to call when an image is opened
-						'opened' : function (image, link) {},
+						'opened' : function (image, link) { console.log('opened:', image, link); return true; },
 						// function to call then an image is closed
-						'closed' : function () {}
+						'closed' : function () { console.log('closed'); }
 					});
 				//-->
 				</script>
