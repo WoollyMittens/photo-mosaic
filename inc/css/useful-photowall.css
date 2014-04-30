@@ -36,24 +36,14 @@
   	Typography
   */
   /*
-  	container style
-  */
-  /* line 12, ../../src/scss/useful-photowall.scss */
-  .photowall, .photowall-bricks {
-    max-height: 320px;
-    overflow: hidden;
-    overflow-y: auto;
-    width: 100%;
-  }
-
-  /*
   	component styles
   */
-  /* line 21, ../../src/scss/useful-photowall.scss */
+  /* line 12, ../../src/scss/useful-photowall.scss */
   .photowall {
     margin: 0;
     padding: 0;
     position: relative;
+    height: 320px;
     /*
     	preload state
     */
@@ -67,36 +57,44 @@
     	busy spinner
     */
   }
-  /* line 25, ../../src/scss/useful-photowall.scss */
+  /* line 17, ../../src/scss/useful-photowall.scss */
   .photowall * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     -ms-interpolation-mode: bicubic;
   }
-  /* line 32, ../../src/scss/useful-photowall.scss */
+  /* line 24, ../../src/scss/useful-photowall.scss */
   .photowall.photowall-passive {
     visibility: hidden;
   }
-  /* line 35, ../../src/scss/useful-photowall.scss */
+  /* line 27, ../../src/scss/useful-photowall.scss */
   .photowall.photowall-active {
     visibility: visible;
   }
-  /* line 41, ../../src/scss/useful-photowall.scss */
-  .photowall ul {
+  /* line 33, ../../src/scss/useful-photowall.scss */
+  .photowall .photowall-bricks {
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+  }
+  /* line 39, ../../src/scss/useful-photowall.scss */
+  .photowall .photowall-bricks ul {
     display: block;
     margin: 0;
     padding: 0;
     width: 102%;
   }
-  /* line 46, ../../src/scss/useful-photowall.scss */
-  .photowall ul li {
+  /* line 44, ../../src/scss/useful-photowall.scss */
+  .photowall .photowall-bricks ul li {
     display: inline;
     margin: 0;
     padding: 0;
   }
-  /* line 50, ../../src/scss/useful-photowall.scss */
-  .photowall ul li img {
+  /* line 48, ../../src/scss/useful-photowall.scss */
+  .photowall .photowall-bricks ul li img {
     display: inline-block;
     height: 128px;
     width: auto;
@@ -104,7 +102,7 @@
     margin: 0 -2px -3px 0;
     vertical-align: top;
   }
-  /* line 63, ../../src/scss/useful-photowall.scss */
+  /* line 62, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail {
     -webkit-transition: opacity ease;
     -webkit-transition-delay: 500ms;
@@ -122,7 +120,7 @@
     text-align: center;
     z-index: 20000;
   }
-  /* line 76, ../../src/scss/useful-photowall.scss */
+  /* line 75, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail .photowall-closer {
     overflow: hidden;
     position: relative;
@@ -148,7 +146,7 @@
     text-align: center;
     text-decoration: none;
   }
-  /* line 89, ../../src/scss/useful-photowall.scss */
+  /* line 88, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail .photowall-closer:before {
     content: '';
     display: block;
@@ -161,27 +159,27 @@
     width: 24px;
     background-image: url(../img/photowall.png);
   }
-  /* line 93, ../../src/scss/useful-photowall.scss */
+  /* line 92, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail .photowall-closer:hover {
     background: #ff9800;
   }
-  /* line 98, ../../src/scss/useful-photowall.scss */
+  /* line 97, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail-maximise {
     position: fixed;
   }
-  /* line 101, ../../src/scss/useful-photowall.scss */
+  /* line 100, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail-passive {
     opacity: 0;
     -webkit-opacity: 0;
     visibility: hidden\9;
   }
-  /* line 106, ../../src/scss/useful-photowall.scss */
+  /* line 105, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-detail-active {
     opacity: 1;
     -webkit-opacity: 1;
     visibility: visible\9;
   }
-  /* line 114, ../../src/scss/useful-photowall.scss */
+  /* line 113, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-busy {
     border-radius: 5px;
     opacity: 0.8;
@@ -195,11 +193,11 @@
     width: 48px;
     z-index: 20;
   }
-  /* line 127, ../../src/scss/useful-photowall.scss */
+  /* line 126, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-busy-passive {
     visibility: hidden;
   }
-  /* line 130, ../../src/scss/useful-photowall.scss */
+  /* line 129, ../../src/scss/useful-photowall.scss */
   .photowall .photowall-busy-active {
     visibility: visible;
   }

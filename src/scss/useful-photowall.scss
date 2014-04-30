@@ -7,21 +7,13 @@
 	@import "definitions";
 	@import "typography";
 	/*
-		container style
-	*/
-	.photowall, .photowall-bricks {
-		max-height : 320px;
-		overflow : hidden;
-		overflow-y : auto;
-		width : 100%;
-	}
-	/*
 		component styles
 	*/
 	.photowall {
 		margin : 0;
 		padding : 0;
 		position : relative;
+		height : 320px;
 		* {
 			@include box-sizing(border-box);
 			-ms-interpolation-mode: bicubic;
@@ -38,22 +30,29 @@
 		/*
 			photowall bricks
 		*/
-		ul {
-			display : block;
-			margin : 0;
-			padding : 0;
-			width : 102%;
-			li {
-				display : inline;
+		.photowall-bricks {
+			overflow : hidden;
+			overflow-y : auto;
+			-webkit-overflow-scrolling: touch;
+			width : 100%;
+			height : 100%;
+			ul {
+				display : block;
 				margin : 0;
 				padding : 0;
-				img {
-					display : inline-block;
-					height : 128px;
-					width : auto;
-					border : solid 1px #fff;
-					margin : 0 -2px -3px 0;
-					vertical-align : top;
+				width : 102%;
+				li {
+					display : inline;
+					margin : 0;
+					padding : 0;
+					img {
+						display : inline-block;
+						height : 128px;
+						width : auto;
+						border : solid 1px #fff;
+						margin : 0 -2px -3px 0;
+						vertical-align : top;
+					}
 				}
 			}
 		}
