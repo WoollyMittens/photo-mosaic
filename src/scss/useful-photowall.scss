@@ -72,7 +72,8 @@
 			text-align : center;
 			z-index : 20000;
 			.photowall-image {}
-			.photowall-closer {
+			.photowall-closer,
+			.photowall-locator {
 				@include iconParent(48);
 				@include rem('width', 3);
 				@include rem('height', 3);
@@ -91,6 +92,16 @@
 				}
 				&:hover {
 					background : $color-hover;
+				}
+			}
+			.photowall-locator {
+				@include rem('right', 5);
+				&:before {
+					@include iconCenter(24);
+					background-image : url(../img/marker-photo.png);
+					background-size : 24px 24px;
+				}
+				&:hover {
 				}
 			}
 		}

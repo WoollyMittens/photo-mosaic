@@ -29,6 +29,8 @@
 				this.popup.className += (cfg.maximise) ? ' photowall-detail-maximise' : '';
 				// add a close gadget
 				this.addCloser();
+				// add a locator gadget
+				this.addLocator(index);
 				// add the popup to the parent
 				parent.obj.appendChild(this.popup);
 				// add the image
@@ -74,12 +76,34 @@
 			// build a close gadget
 			closer = document.createElement('a');
 			closer.className = 'photowall-closer';
-			closer.innerHTML = 'x';
+			closer.innerHTML = 'Close';
 			closer.href = '#close';
 			// add the close event handler
 			closer.onclick = this.onClose();
 			// add the close gadget to the image
 			this.popup.appendChild(closer);
+		};
+		this.addLocator = function (index) {
+			var parent = this.parent, cfg = this.parent.cfg, locator,
+			// build the geo marker icon
+			locator = document.createElement('a');
+			locator.className = 'photowall-locator';
+			locator.innerHTML = 'Show on a map';
+			locator.href = '#map';
+			// add the event handler
+			locator.onclick = this.onLocate(index);
+			// add the location marker to the image
+			this.popup.appendChild(locator);
+		};
+		this.onLocate = function (index) {
+			var context = this, cfg = this.parent.cfg;
+			return function () {
+				// trigger the opened event if available
+				if (cfg.located !== null) {
+					// catch the reply from the opened event
+					cfg.located(cfg.images.objects[index], cfg.images.links[index]);
+				}
+			};
 		};
 		this.onOpen = function () {
 			var context = this;
