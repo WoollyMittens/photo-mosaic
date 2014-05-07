@@ -12,7 +12,7 @@
 	"use strict";
 
 	// private functions
-	useful.PhotowallDetails = function (parent) {
+	useful.Photowall_Details = function (parent) {
 		// properties
 		this.parent = parent;
 		this.popup = null;

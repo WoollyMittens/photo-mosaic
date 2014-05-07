@@ -12,7 +12,7 @@
 	"use strict";
 
 	// private functions
-	useful.PhotowallThumbnails = function (parent) {
+	useful.Photowall_Thumbnails = function (parent) {
 		// properties
 		this.parent = parent;
 		// methods

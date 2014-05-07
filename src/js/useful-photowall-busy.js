@@ -12,7 +12,7 @@
 	"use strict";
 
 	// private functions
-	useful.PhotowallBusy = function (parent) {
+	useful.Photowall_Busy = function (parent) {
 		// properties
 		this.parent = parent;
 		this.spinner = null;
@@ -31,8 +31,6 @@
 			// hide the spinner
 			this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');
 		};
-		// go
-		this.build();
 	};
 
 }(window.useful = window.useful || {}));

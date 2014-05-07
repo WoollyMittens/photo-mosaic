@@ -16,13 +16,13 @@
 		// properties
 		this.obj = obj;
 		this.cfg = cfg;
+		// components
+		this.busy = new useful.Photowall_Busy(this);
+		this.details = new useful.Photowall_Details(this);
+		this.thumbnails = new useful.Photowall_Thumbnails(this);
 		// methods
 		this.start = function () {
 			var context = this;
-			// create the component parts
-			this.busy = new useful.PhotowallBusy(this);
-			this.details = new useful.PhotowallDetails(this);
-			this.thumbnails = new useful.PhotowallThumbnails(this);
 			// communicate the initial state
 			this.obj.className += ' photowall-passive';
 			// store the images
@@ -30,9 +30,9 @@
 			this.cfg.images.links = this.obj.getElementsByTagName('a');
 			this.cfg.images.objects = this.obj.getElementsByTagName('img');
 			// prepare the contents
-			this.prepare(this);
+			this.prepare();
 			// construct the spinner
-			this.busy.build(this);
+			this.busy.build();
 			// check every once in a while to see if the image dimensions are known yet
 			this.cfg.wait = setInterval(function () {
 				if (context.thumbnails.complete()) {
