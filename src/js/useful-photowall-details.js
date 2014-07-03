@@ -54,14 +54,15 @@
 			image.className = 'photowall-image';
 			image.setAttribute('alt', imageCaption);
 			image.onload = this.onOpen();
+			image.onerror = this.onFail(index);
 			// pick the dimensions based on the aspect ratio
 			if (imageAspect > popupAspect) {
-				image.setAttribute('width', '');
-				image.setAttribute('height', '100%');
+				image.style.width = 'auto';
+				image.style.height = '100%';
 				imageSize = 'height=' + popupHeight;
 			} else {
-				image.setAttribute('width', '100%');
-				image.setAttribute('height', '');
+				image.style.height = 'auto';
+				image.style.width = '100%';
 				imageSize = 'width=' + popupWidth;
 			}
 			// add the image to the popup
@@ -118,6 +119,26 @@
 					image.style.marginTop = Math.round((context.popup.offsetHeight - image.offsetHeight) / 2) + 'px';
 					// reveal it
 					context.popup.className = context.popup.className.replace(/-passive/gi, '-active');
+				}
+			};
+		};
+		this.onFail = function (index) {
+			var context = this;
+			return function () {
+				var parent = context.parent, cfg = context.parent.cfg;
+				// give up on the popup
+				if (context.popup) {
+					// hide the busy indicator
+					parent.busy.hide();
+					// remove it
+					parent.obj.removeChild(context.popup);
+					// remove its reference
+					context.popup = null;
+				};
+				// trigger the opened handler directly
+				if (cfg.located !== null) {
+					// catch the reply from the opened event
+					cfg.located(cfg.images.objects[index], cfg.images.links[index]);
 				}
 			};
 		};
