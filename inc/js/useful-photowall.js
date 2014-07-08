@@ -168,7 +168,7 @@
 	"use strict";
 
 	// private functions
-	useful.PhotowallBusy = function (parent) {
+	useful.Photowall_Busy = function (parent) {
 		// properties
 		this.parent = parent;
 		this.spinner = null;
@@ -187,8 +187,6 @@
 			// hide the spinner
 			this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');
 		};
-		// go
-		this.build();
 	};
 
 }(window.useful = window.useful || {}));
@@ -207,7 +205,7 @@
 	"use strict";
 
 	// private functions
-	useful.PhotowallDetails = function (parent) {
+	useful.Photowall_Details = function (parent) {
 		// properties
 		this.parent = parent;
 		this.popup = null;
@@ -224,6 +222,8 @@
 				this.popup.className += (cfg.maximise) ? ' photowall-detail-maximise' : '';
 				// add a close gadget
 				this.addCloser();
+				// add a locator gadget
+				this.addLocator(index);
 				// add the popup to the parent
 				parent.obj.appendChild(this.popup);
 				// add the image
@@ -247,14 +247,15 @@
 			image.className = 'photowall-image';
 			image.setAttribute('alt', imageCaption);
 			image.onload = this.onOpen();
+			image.onerror = this.onFail(index);
 			// pick the dimensions based on the aspect ratio
 			if (imageAspect > popupAspect) {
-				image.setAttribute('width', '');
-				image.setAttribute('height', '100%');
+				image.style.width = 'auto';
+				image.style.height = '100%';
 				imageSize = 'height=' + popupHeight;
 			} else {
-				image.setAttribute('width', '100%');
-				image.setAttribute('height', '');
+				image.style.height = 'auto';
+				image.style.width = '100%';
 				imageSize = 'width=' + popupWidth;
 			}
 			// add the image to the popup
@@ -269,12 +270,34 @@
 			// build a close gadget
 			closer = document.createElement('a');
 			closer.className = 'photowall-closer';
-			closer.innerHTML = 'x';
+			closer.innerHTML = 'Close';
 			closer.href = '#close';
 			// add the close event handler
 			closer.onclick = this.onClose();
 			// add the close gadget to the image
 			this.popup.appendChild(closer);
+		};
+		this.addLocator = function (index) {
+			var parent = this.parent, cfg = this.parent.cfg, locator,
+			// build the geo marker icon
+			locator = document.createElement('a');
+			locator.className = 'photowall-locator';
+			locator.innerHTML = 'Show on a map';
+			locator.href = '#map';
+			// add the event handler
+			locator.onclick = this.onLocate(index);
+			// add the location marker to the image
+			this.popup.appendChild(locator);
+		};
+		this.onLocate = function (index) {
+			var context = this, cfg = this.parent.cfg;
+			return function () {
+				// trigger the opened event if available
+				if (cfg.located !== null) {
+					// catch the reply from the opened event
+					cfg.located(cfg.images.objects[index], cfg.images.links[index]);
+				}
+			};
 		};
 		this.onOpen = function () {
 			var context = this;
@@ -289,6 +312,26 @@
 					image.style.marginTop = Math.round((context.popup.offsetHeight - image.offsetHeight) / 2) + 'px';
 					// reveal it
 					context.popup.className = context.popup.className.replace(/-passive/gi, '-active');
+				}
+			};
+		};
+		this.onFail = function (index) {
+			var context = this;
+			return function () {
+				var parent = context.parent, cfg = context.parent.cfg;
+				// give up on the popup
+				if (context.popup) {
+					// hide the busy indicator
+					parent.busy.hide();
+					// remove it
+					parent.obj.removeChild(context.popup);
+					// remove its reference
+					context.popup = null;
+				};
+				// trigger the opened handler directly
+				if (cfg.located !== null) {
+					// catch the reply from the opened event
+					cfg.located(cfg.images.objects[index], cfg.images.links[index]);
 				}
 			};
 		};
@@ -332,7 +375,7 @@
 	"use strict";
 
 	// private functions
-	useful.PhotowallThumbnails = function (parent) {
+	useful.Photowall_Thumbnails = function (parent) {
 		// properties
 		this.parent = parent;
 		// methods
@@ -445,13 +488,13 @@
 		// properties
 		this.obj = obj;
 		this.cfg = cfg;
+		// components
+		this.busy = new useful.Photowall_Busy(this);
+		this.details = new useful.Photowall_Details(this);
+		this.thumbnails = new useful.Photowall_Thumbnails(this);
 		// methods
 		this.start = function () {
 			var context = this;
-			// create the component parts
-			this.busy = new useful.PhotowallBusy(this);
-			this.details = new useful.PhotowallDetails(this);
-			this.thumbnails = new useful.PhotowallThumbnails(this);
 			// communicate the initial state
 			this.obj.className += ' photowall-passive';
 			// store the images
@@ -459,9 +502,9 @@
 			this.cfg.images.links = this.obj.getElementsByTagName('a');
 			this.cfg.images.objects = this.obj.getElementsByTagName('img');
 			// prepare the contents
-			this.prepare(this);
+			this.prepare();
 			// construct the spinner
-			this.busy.build(this);
+			this.busy.build();
 			// check every once in a while to see if the image dimensions are known yet
 			this.cfg.wait = setInterval(function () {
 				if (context.thumbnails.complete()) {

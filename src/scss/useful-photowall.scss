@@ -1,150 +1,139 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "mixins";
 /*
-	Example Styling for a Photo Wall
+	component styles
 */
-@media all {
-	@import "compass/css3";
-	@import "compass/utilities";
-	@import "definitions";
-	@import "typography";
+.photowall {
+	margin : 0;
+	padding : 0;
+	position : relative;
+	height : 320px;
+	* {
+		@include box-sizing(border-box);
+		-ms-interpolation-mode: bicubic;
+	}
 	/*
-		component styles
+		preload state
 	*/
-	.photowall {
-		margin : 0;
-		padding : 0;
-		position : relative;
-		height : 320px;
-		* {
-			@include box-sizing(border-box);
-			-ms-interpolation-mode: bicubic;
-		}
-		/*
-			preload state
-		*/
-		&.photowall-passive {
-			visibility : hidden;
-		}
-		&.photowall-active {
-			visibility : visible;
-		}
-		/*
-			photowall bricks
-		*/
-		.photowall-bricks {
-			overflow : hidden;
-			overflow-y : auto;
-			-webkit-overflow-scrolling: touch;
-			width : 100%;
-			height : 100%;
-			ul {
-				display : block;
+	&.photowall-passive {
+		visibility : hidden;
+	}
+	&.photowall-active {
+		visibility : visible;
+	}
+	/*
+		photowall bricks
+	*/
+	.photowall-bricks {
+		overflow : hidden;
+		overflow-y : auto;
+		-webkit-overflow-scrolling: touch;
+		width : 100%;
+		height : 100%;
+		ul {
+			display : block;
+			margin : 0;
+			padding : 0;
+			width : 102%;
+			li {
+				display : inline;
 				margin : 0;
 				padding : 0;
-				width : 102%;
-				li {
-					display : inline;
-					margin : 0;
-					padding : 0;
-					img {
-						display : inline-block;
-						height : 128px;
-						width : auto;
-						border : solid 1px #fff;
-						margin : 0 -2px -3px 0;
-						vertical-align : top;
-					}
+				img {
+					display : inline-block;
+					height : 128px;
+					width : auto;
+					border : solid 1px #fff;
+					margin : 0 -2px -3px 0;
+					vertical-align : top;
 				}
 			}
-		}
-		/*
-			photowall popup
-		*/
-		.photowall-detail {
-			@include transition(opacity ease 500ms);
-			-webkit-transition : -webkit-opacity ease 500ms;
-			background : rgba(0, 0, 0, 0.9);
-			background : #000\9;
-			bottom : 0;
-			left : 0;
-			right : 0;
-			top : 0;
-			position : absolute;
-			text-align : center;
-			z-index : 20000;
-			.photowall-image {}
-			.photowall-closer,
-			.photowall-locator {
-				@include iconParent(48);
-				@include rem('width', 3);
-				@include rem('height', 3);
-				@include rem('right', 1);
-				@include rem('top', 1);
-				background : $color-passive;
-				color : #fff;
-				cursor : pointer;
-				font-weight : bold;
-				position : absolute;
-				text-align : center;
-				text-decoration : none;
-				&:before {
-					@include iconCenter(24);
-					background-image : url(../img/photowall.png);
-				}
-				&:hover {
-					background : $color-hover;
-				}
-			}
-			.photowall-locator {
-				@include rem('right', 5);
-				&:before {
-					@include iconCenter(24);
-					background-image : url(../img/marker-photo.png);
-					background-size : 24px 24px;
-				}
-				&:hover {
-				}
-			}
-		}
-		.photowall-detail-maximise {
-			position : fixed;
-		}
-		.photowall-detail-passive {
-			opacity : 0;
-			-webkit-opacity : 0;
-			visibility : hidden\9;
-		}
-		.photowall-detail-active {
-			opacity : 1;
-			-webkit-opacity : 1;
-			visibility : visible\9;
-		}
-		/*
-			busy spinner
-		*/
-		.photowall-busy {
-			border-radius : 5px;
-			opacity : 0.8;
-			-webkit-opacity : 0.8;
-			background : #000 url(../img/busy_8.gif) no-repeat 50% 50%;
-			height : 48px;
-			left : 50%;
-			margin : -24px;
-			position : absolute;
-			top : 50%;
-			width : 48px;
-			z-index : 20;
-		}
-		.photowall-busy-passive {
-			visibility : hidden;
-		}
-		.photowall-busy-active {
-			visibility : visible;
 		}
 	}
+	/*
+		photowall popup
+	*/
+	.photowall-detail {
+		@include transition(opacity ease 500ms);
+		-webkit-transition : -webkit-opacity ease 500ms;
+		background : rgba(0, 0, 0, 0.9);
+		background : #000\9;
+		bottom : 0;
+		left : 0;
+		right : 0;
+		top : 0;
+		position : absolute;
+		text-align : center;
+		z-index : 20000;
+		.photowall-image {}
+		.photowall-closer,
+		.photowall-locator {
+			@include iconParent(48);
+			@include rem('width', 3);
+			@include rem('height', 3);
+			@include rem('right', 1);
+			@include rem('top', 1);
+			background : $color-passive;
+			color : #fff;
+			cursor : pointer;
+			font-weight : bold;
+			position : absolute;
+			text-align : center;
+			text-decoration : none;
+			&:before {
+				@include iconCenter(24);
+				background-image : url(../img/photowall.png);
+			}
+			&:hover {
+				background : $color-hover;
+			}
+		}
+		.photowall-locator {
+			visibility : hidden;
+			@include rem('right', 5);
+			&:before {
+				@include iconCenter(24);
+				background-image : url(../img/marker-photo.png);
+				background-size : 24px 24px;
+			}
+			&:hover {
+			}
+		}
+	}
+	.photowall-detail-maximise {
+		position : fixed;
+	}
+	.photowall-detail-passive {
+		opacity : 0;
+		-webkit-opacity : 0;
+		visibility : hidden\9;
+	}
+	.photowall-detail-active {
+		opacity : 1;
+		-webkit-opacity : 1;
+		visibility : visible\9;
+	}
+	/*
+		busy spinner
+	*/
+	.photowall-busy {
+		border-radius : 5px;
+		opacity : 0.8;
+		-webkit-opacity : 0.8;
+		background : #000 url(../img/busy_8.gif) no-repeat 50% 50%;
+		height : 48px;
+		left : 50%;
+		margin : -24px;
+		position : absolute;
+		top : 50%;
+		width : 48px;
+		z-index : 20;
+	}
+	.photowall-busy-passive {
+		visibility : hidden;
+	}
+	.photowall-busy-active {
+		visibility : visible;
+	}
 }
-@media (min-width: 1200px) {}
-@media (min-width: 980px) and (max-width: 1199px) {}
-@media (min-width: 768px) and (max-width: 979px) {}
-@media (max-width: 767px) {}
-@media (max-width: 480px) {}
-@media print {}
