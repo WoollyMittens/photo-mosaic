@@ -100,7 +100,7 @@
 			var context = this, cfg = this.parent.cfg;
 			return function () {
 				// trigger the opened event if available
-				if (cfg.located !== null) {
+				if (cfg.located) {
 					// catch the reply from the opened event
 					cfg.located(cfg.images.objects[index], cfg.images.links[index]);
 				}
