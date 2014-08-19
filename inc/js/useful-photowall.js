@@ -278,7 +278,7 @@
 			this.popup.appendChild(closer);
 		};
 		this.addLocator = function (index) {
-			var parent = this.parent, cfg = this.parent.cfg, locator,
+			var parent = this.parent, cfg = this.parent.cfg, locator;
 			// build the geo marker icon
 			locator = document.createElement('a');
 			locator.className = 'photowall-locator';
@@ -293,7 +293,7 @@
 			var context = this, cfg = this.parent.cfg;
 			return function () {
 				// trigger the opened event if available
-				if (cfg.located !== null) {
+				if (cfg.located) {
 					// catch the reply from the opened event
 					cfg.located(cfg.images.objects[index], cfg.images.links[index]);
 				}
@@ -327,7 +327,7 @@
 					parent.obj.removeChild(context.popup);
 					// remove its reference
 					context.popup = null;
-				};
+				}
 				// trigger the opened handler directly
 				if (cfg.located !== null) {
 					// catch the reply from the opened event
