@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 	// components
 	var name = 'photowall';
 	var libs = [
-		'../useful-polyfills/src/js/useful-polyfills.js'
+		'../useful-polyfills/src/js/useful-polyfills.js',
+		'../useful-gestures/src/js/useful-gestures.js'
 	];
 	var mixins = [
 		'../useful/src/scss/_mixins.scss'

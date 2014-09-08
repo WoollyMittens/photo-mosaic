@@ -63,10 +63,13 @@
 		left : 0;
 		right : 0;
 		top : 0;
+		overflow : hidden;
 		position : absolute;
 		text-align : center;
 		z-index : 20000;
-		.photowall-image {}
+		.photowall-image {
+			z-index : 1;
+		}
 		.photowall-closer,
 		.photowall-locator {
 			@include iconParent(48);
@@ -81,6 +84,7 @@
 			position : absolute;
 			text-align : center;
 			text-decoration : none;
+			z-index : 2;
 			&:before {
 				@include iconCenter(24);
 				background-image : url(../img/photowall.png);

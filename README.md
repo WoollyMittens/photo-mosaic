@@ -33,6 +33,7 @@ var photowall = new useful.Photowall( document.getElementById('id'), {
 	'row' : 150,
 	'orphans' : 0,
 	'maximise' : true,
+	'zoom' : 2,
 	'slice' : './php/imageslice.php?src=../{src}&{size}',
 	'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
 	'opened' : function (image, link) {},
@@ -47,6 +48,8 @@ var photowall = new useful.Photowall( document.getElementById('id'), {
 **'orphans' : {integer}** - Amount of orphaned thumbnails to allow on the last line.
 
 **'maximise' : {boolean}** - If true, creates a popup the size of the entire window for the photos.
+
+**'zoom' : {integer}** - The maximum zoom level of the popup.
 
 **'slice' : {string}** - Optional web-service for resizing images. An example is provided as *./php/imageslice.php*.
 
