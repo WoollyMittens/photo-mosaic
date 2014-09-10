@@ -163,7 +163,7 @@
 					this.lastTouch &&
 					Math.abs(this.touchOrigin.x - this.lastTouch.x) < 10 &&
 					Math.abs(this.touchOrigin.y - this.lastTouch.y) < 10 &&
-					new Date().getTime() - this.lastTouch.time < 400 &&
+					new Date().getTime() - this.lastTouch.time < 500 &&
 					new Date().getTime() - this.lastTouch.time > 100
 				) {
 					// treat this as a double tap
