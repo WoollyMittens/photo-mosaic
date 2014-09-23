@@ -6,7 +6,10 @@
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-(function (useful) {
+// public object
+var useful = useful || {};
+
+(function(){
 
 	// invoke strict mode
 	"use strict";
@@ -163,7 +166,7 @@
 					this.lastTouch &&
 					Math.abs(this.touchOrigin.x - this.lastTouch.x) < 10 &&
 					Math.abs(this.touchOrigin.y - this.lastTouch.y) < 10 &&
-					new Date().getTime() - this.lastTouch.time < 300 &&
+					new Date().getTime() - this.lastTouch.time < 500 &&
 					new Date().getTime() - this.lastTouch.time > 100
 				) {
 					// treat this as a double tap
@@ -455,7 +458,12 @@
 		this.start();
 	};
 
-}(window.useful = window.useful || {}));
+	// return as a require.js module
+	if (typeof module !== 'undefined') {
+		exports = module.exports = useful.Gestures;
+	}
+
+})();
 
 /*
 	Source:
@@ -745,7 +753,10 @@ var useful = useful || {};
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-(function (useful) {
+// public object
+var useful = useful || {};
+
+(function(){
 
 	// invoke strict mode
 	"use strict";
@@ -772,7 +783,12 @@ var useful = useful || {};
 		};
 	};
 
-}(window.useful = window.useful || {}));
+	// return as a require.js module
+	if (typeof module !== 'undefined') {
+		exports = module.exports = useful.Photowall_Busy;
+	}
+
+})();
 
 /*
 	Source:
@@ -782,7 +798,10 @@ var useful = useful || {};
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-(function (useful) {
+// public object
+var useful = useful || {};
+
+(function(){
 
 	// invoke strict mode
 	"use strict";
@@ -996,7 +1015,12 @@ var useful = useful || {};
 		};
 	};
 
-}(window.useful = window.useful || {}));
+	// return as a require.js module
+	if (typeof module !== 'undefined') {
+		exports = module.exports = useful.Photowall_Details;
+	}
+
+})();
 
 /*
 	Source:
@@ -1006,7 +1030,10 @@ var useful = useful || {};
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-(function (useful) {
+// public object
+var useful = useful || {};
+
+(function(){
 
 	// invoke strict mode
 	"use strict";
@@ -1105,7 +1132,12 @@ var useful = useful || {};
 		};
 	};
 
-}(window.useful = window.useful || {}));
+	// return as a require.js module
+	if (typeof module !== 'undefined') {
+		exports = module.exports = useful.Photowall_Thumbnails;
+	}
+
+})();
 
 /*
 	Source:
@@ -1115,7 +1147,10 @@ var useful = useful || {};
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-(function (useful) {
+// public object
+var useful = useful || {};
+
+(function(){
 
 	// invoke strict mode
 	"use strict";
@@ -1170,4 +1205,9 @@ var useful = useful || {};
 		this.start();
 	};
 
-}(window.useful = window.useful || {}));
+	// return as a require.js module
+	if (typeof module !== 'undefined') {
+		exports = module.exports = useful.Photowall;
+	}
+
+})();
