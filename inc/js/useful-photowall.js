@@ -79,19 +79,15 @@ var useful = useful || {};
 		this.readEvent = function (event) {
 			var coords = {}, offsets;
 			// try all likely methods of storing coordinates in an event
-			if (event.x !== undefined) {
-				coords.x = event.x;
-				coords.y = event.y;
+			if (event.pageX !== undefined) {
+				coords.x = event.pageX;
+				coords.y = event.pageY;
 			} else if (event.touches && event.touches[0]) {
 				coords.x = event.touches[0].pageX;
 				coords.y = event.touches[0].pageY;
-			} else if (event.pageX !== undefined) {
-				coords.x = event.pageX;
-				coords.y = event.pageY;
 			} else {
-				offsets = this.correctOffset(event.target || event.srcElement);
-				coords.x = event.layerX + offsets.x;
-				coords.y = event.layerY + offsets.y;
+				coords.x = event.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+				coords.y = event.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
 			}
 			return coords;
 		};
@@ -832,8 +828,8 @@ var useful = useful || {};
 				// add the popup to the parent
 				parent.obj.appendChild(this.popup);
 				// add the touch events
-				this.translation = [0,0,0];
-				this.scaling = [1,1,1];
+				this.translation = [0,0];
+				this.scaling = [1,1];
 				this.gestures = new useful.Gestures( this.popup, {
 					'drag' : this.onTransformed(),
 					'pinch' : this.onTransformed(),
@@ -920,11 +916,12 @@ var useful = useful || {};
 			this.translation[0] = Math.min( Math.max( this.translation[0] , -overscanX), overscanX );
 			this.translation[1] = Math.min( Math.max( this.translation[1] , -overscanY), overscanY );
 			// formulate the style rule
-			var scaling = 'scale3d(' + this.scaling.join(',') + ')',
-				translation = 'translate3d(' + this.translation.join('%,') + ')';
+			var scaling = 'scale(' + this.scaling.join(',') + ')',
+				translation = 'translate(' + this.translation.join('%,') + '%)';
 			// apply the style rule
 			this.image.style.transform = scaling + ' ' + translation;
 			this.image.style.webkitTransform = scaling + ' ' + translation;
+			this.image.style.msTransform = scaling + ' ' + translation;
 		};
 		// event handlers
 		this.onLocate = function (index) {
