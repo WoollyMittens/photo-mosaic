@@ -92,12 +92,11 @@
 }
 /* line 57, ../../src/scss/useful-photowall.scss */
 .photowall .photowall-detail {
-  -webkit-transition: opacity ease;
-  -webkit-transition-delay: 500ms;
-  transition: opacity ease 500ms;
+  -webkit-transition: opacity 500ms ease;
+  transition: opacity 500ms ease;
   -webkit-transition: -webkit-opacity ease 500ms;
   background: rgba(0, 0, 0, 0.9);
-  background: black \9;
+  background: #000 \9;
   bottom: 0;
   left: 0;
   right: 0;
@@ -111,7 +110,7 @@
 .photowall .photowall-detail .photowall-image {
   z-index: 1;
 }
-/* line 74, ../../src/scss/useful-photowall.scss */
+/* line 73, ../../src/scss/useful-photowall.scss */
 .photowall .photowall-detail .photowall-closer,
 .photowall .photowall-detail .photowall-locator {
   overflow: hidden;
@@ -207,7 +206,7 @@
   border-radius: 5px;
   opacity: 0.8;
   -webkit-opacity: 0.8;
-  background: black url(../img/busy_8.gif) no-repeat 50% 50%;
+  background: #000 url(../img/busy_8.gif) no-repeat 50% 50%;
   height: 48px;
   left: 50%;
   margin: -24px;
