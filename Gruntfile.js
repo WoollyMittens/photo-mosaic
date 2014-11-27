@@ -4,7 +4,9 @@ module.exports = function(grunt) {
 	var name = 'photowall';
 	var libs = [
 		'../useful-polyfills/src/js/useful-polyfills.js',
-		'../useful-gestures/src/js/useful-gestures.js'
+		'../useful-gestures/src/js/useful-gestures.js',
+		'../useful-gestures/src/js/useful-gestures-multi.js',
+		'../useful-gestures/src/js/useful-gestures-single.js'
 	];
 	var mixins = [
 		'../useful/src/scss/_mixins.scss'
