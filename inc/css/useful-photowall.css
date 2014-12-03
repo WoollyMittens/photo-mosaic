@@ -33,7 +33,7 @@ Applies the "clearfix" hack to a container with floating content
   margin: 0;
   padding: 0;
   position: relative;
-  height: 320px;
+  height: 320px
   /*
   	preload state
   */
@@ -92,7 +92,6 @@ Applies the "clearfix" hack to a container with floating content
 }
 /* line 57, ../../src/scss/useful-photowall.scss */
 .photowall .photowall-detail {
-  -webkit-transition: opacity 500ms ease;
   transition: opacity 500ms ease;
   -webkit-transition: -webkit-opacity ease 500ms;
   background: rgba(0, 0, 0, 0.9);
