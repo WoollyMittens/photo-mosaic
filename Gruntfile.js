@@ -5,6 +5,7 @@ module.exports = function(grunt) {
 	var libs = [
 		'../useful-polyfills/src/js/useful-polyfills.js',
 		'../useful-gestures/src/js/useful-gestures.js',
+		'../useful-gestures/src/js/useful-gestures-main.js',
 		'../useful-gestures/src/js/useful-gestures-multi.js',
 		'../useful-gestures/src/js/useful-gestures-single.js'
 	];

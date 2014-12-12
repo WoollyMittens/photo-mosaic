@@ -46,7 +46,9 @@
 				</figure>
 				<script>
 				//<!--
-					var photowall = new useful.Photowall( document.getElementById('photowall'), {
+					var photowall = new useful.Photowall().init({
+						// target element
+						'element' : document.getElementById('photowall'),
 						// average height of rows
 						'row' : 150,
 						// amount of orphaned thumbnails to allow on the last line

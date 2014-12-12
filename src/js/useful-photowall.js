@@ -6,67 +6,40 @@
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-// public object
+// create the constructor if needed
 var useful = useful || {};
+useful.Photowall = useful.Photowall || function () {};
 
-(function(){
-
-	// invoke strict mode
+// extend the constructor
+useful.Photowall.prototype.init = function (config) {
+	// properties
 	"use strict";
-
-	// private functions
-	useful.Photowall = function (obj, cfg) {
-		// properties
-		this.obj = obj;
-		this.cfg = cfg;
-		// components
-		this.busy = new useful.Photowall_Busy(this);
-		this.details = new useful.Photowall_Details(this);
-		this.thumbnails = new useful.Photowall_Thumbnails(this);
-		// methods
-		this.start = function () {
-			var context = this;
-			// communicate the initial state
-			this.obj.className += ' photowall-passive';
-			// store the images
-			this.cfg.images = {};
-			this.cfg.images.links = this.obj.getElementsByTagName('a');
-			this.cfg.images.objects = this.obj.getElementsByTagName('img');
-			// prepare the contents
-			this.prepare();
-			// construct the spinner
-			this.busy.build();
-			// check every once in a while to see if the image dimensions are known yet
-			this.cfg.wait = setInterval(function () {
-				if (context.thumbnails.complete()) {
-					// cancel the checking
-					clearTimeout(context.cfg.wait);
-					// measure the dimensions
-					context.thumbnails.measure();
-					// construct the wall
-					context.thumbnails.redraw();
-				}
-			}, 500);
-			// disable the start function so it can't be started twice
-			this.start = function () {};
-		};
-		this.prepare = function () {
-			// remove the white space
-			this.obj.innerHTML = '<div class="photowall-bricks">' + this.obj.innerHTML.replace(/\t|\r|\n/g, '') + '</div>';
-			// measure the container
-			this.cfg.col = this.obj.offsetWidth;
-			this.cfg.aspect = this.cfg.height / this.cfg.col;
-		};
-		this.focus = function (index) {
-			this.details.show(index);
-		};
-		// go
-		this.start();
+	// methods
+	this.only = function (config) {
+		// start an instance of the script
+		return new this.Main(config, this).init();
 	};
+	this.each = function (config) {
+		var _config, _context = this, instances = [];
+		// for all element
+		for (var a = 0, b = config.elements.length; a < b; a += 1) {
+			// clone the configuration
+			_config = Object.create(config);
+			// insert the current element
+			_config.element = config.elements[a];
+			// delete the list of elements from the clone
+			delete _config.elements;
+			// start a new instance of the object
+			instances[a] = new this.Main(_config, _context).init();
+		}
+		// return the instances
+		return instances;
+	};
+	// return a single or multiple instances of the script
+	return (config.elements) ? this.each(config) : this.only(config);
+};
 
-	// return as a require.js module
-	if (typeof module !== 'undefined') {
-		exports = module.exports = useful.Photowall;
-	}
-
-})();
+// return as a require.js module
+if (typeof module !== 'undefined') {
+	exports = module.exports = useful.Photowall;
+}

@@ -29,7 +29,8 @@ To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5
 ## How to start the script
 
 ```javascript
-var photowall = new useful.Photowall( document.getElementById('id'), {
+var photowall = new useful.Photowall().init({
+	'element' : document.getElementById('id'),
 	'row' : 150,
 	'orphans' : 0,
 	'maximise' : true,

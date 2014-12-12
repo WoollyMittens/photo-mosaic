@@ -6,39 +6,34 @@
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-// public object
+// create the constructor if needed
 var useful = useful || {};
+useful.Photowall = useful.Photowall || function () {};
 
-(function(){
-
-	// invoke strict mode
+// extend the constructor
+useful.Photowall.prototype.Busy = function (parent) {
+	// properties
 	"use strict";
-
-	// private functions
-	useful.Photowall_Busy = function (parent) {
-		// properties
-		this.parent = parent;
-		this.spinner = null;
-		// methods
-		this.build = function () {
-			// construct the spinner
-			this.spinner = document.createElement('div');
-			this.spinner.className = 'photowall-busy photowall-busy-passive';
-			this.parent.obj.appendChild(this.spinner);
-		};
-		this.show = function () {
-			// show the spinner
-			this.spinner.className = this.spinner.className.replace(/-passive/gi, '-active');
-		};
-		this.hide = function () {
-			// hide the spinner
-			this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');
-		};
+	this.parent = parent;
+	this.spinner = null;
+	// methods
+	this.build = function () {
+		// construct the spinner
+		this.spinner = document.createElement('div');
+		this.spinner.className = 'photowall-busy photowall-busy-passive';
+		this.parent.element.appendChild(this.spinner);
 	};
+	this.show = function () {
+		// show the spinner
+		this.spinner.className = this.spinner.className.replace(/-passive/gi, '-active');
+	};
+	this.hide = function () {
+		// hide the spinner
+		this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');
+	};
+};
 
-	// return as a require.js module
-	if (typeof module !== 'undefined') {
-		exports = module.exports = useful.Photowall_Busy;
-	}
-
-})();
+// return as a require.js module
+if (typeof module !== 'undefined') {
+	exports = module.exports = useful.Photowall.Busy;
+}
