@@ -12,11 +12,15 @@ useful.Photowall = useful.Photowall || function () {};
 
 // extend the constructor
 useful.Photowall.prototype.Thumbnails = function (parent) {
-	// properties
+
+	// PROPERTIES
+
 	"use strict";
 	this.parent = parent;
 	this.config = parent.config;
-	// methods
+
+	// METHODS
+
 	this.complete = function () {
 		var a, b, passed = true, parent = this.parent, config = this.config;
 		// for all the images
@@ -27,6 +31,7 @@ useful.Photowall.prototype.Thumbnails = function (parent) {
 		// return the result
 		return passed;
 	};
+
 	this.measure = function () {
 		var parent = this.parent, config = this.config, a, b;
 		// for all images
@@ -40,6 +45,7 @@ useful.Photowall.prototype.Thumbnails = function (parent) {
 			config.images.aspects[a] = config.images.heights[a] / config.images.widths[a];
 		}
 	};
+
 	this.redraw = function () {
 		var parent = this.parent, config = this.config,
 			a, b, last, c, d, compatibilityWidth, proportionalWidth, subtotalWidth = 0, currentRow = [],
@@ -87,6 +93,7 @@ useful.Photowall.prototype.Thumbnails = function (parent) {
 		// communicate the active state
 		parent.element.className = parent.element.className.replace('-passive', '-active');
 	};
+
 	this.clicked = function (index) {
 		var context = this;
 		return function (event) {

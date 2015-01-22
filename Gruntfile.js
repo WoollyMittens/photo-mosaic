@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
-	// components
+	// COMPONENTS
+	
 	var name = 'photowall';
 	var libs = [
 		'../useful-polyfills/src/js/useful-polyfills.js',
@@ -13,7 +14,8 @@ module.exports = function(grunt) {
 		'../useful/src/scss/_mixins.scss'
 	];
 
-	// configuration.
+	// CONFIGURATION
+
 	var config = {
 		pkg: grunt.file.readJSON('package.json'),
 		connect: {
@@ -112,7 +114,8 @@ module.exports = function(grunt) {
 	// init
 	grunt.initConfig(config);
 
-	// dependencies
+	// DEPENDENCIES
+	
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-compass');
@@ -123,7 +126,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-font-optimizer');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 
-	// tasts
+	// TASKS
+	
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('serve', ['connect', 'watch']);
 	grunt.registerTask('dev', ['compass', 'autoprefixer', 'concat']);

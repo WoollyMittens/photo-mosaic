@@ -12,21 +12,27 @@ useful.Photowall = useful.Photowall || function () {};
 
 // extend the constructor
 useful.Photowall.prototype.Busy = function (parent) {
-	// properties
+
+	// PROPERTIES
+
 	"use strict";
 	this.parent = parent;
 	this.spinner = null;
-	// methods
+
+	// METHODS
+
 	this.build = function () {
 		// construct the spinner
 		this.spinner = document.createElement('div');
 		this.spinner.className = 'photowall-busy photowall-busy-passive';
 		this.parent.element.appendChild(this.spinner);
 	};
+
 	this.show = function () {
 		// show the spinner
 		this.spinner.className = this.spinner.className.replace(/-passive/gi, '-active');
 	};
+
 	this.hide = function () {
 		// hide the spinner
 		this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');

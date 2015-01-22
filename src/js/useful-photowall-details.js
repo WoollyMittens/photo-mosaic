@@ -12,7 +12,9 @@ useful.Photowall = useful.Photowall || function () {};
 
 // extend the constructor
 useful.Photowall.prototype.Details = function (parent) {
-	// properties
+
+	// PROPERTIES
+
 	"use strict";
 	this.parent = parent;
 	this.config = parent.config;
@@ -20,7 +22,9 @@ useful.Photowall.prototype.Details = function (parent) {
 	this.image = null;
 	this.translation = [];
 	this.scaling = [];
-	// methods
+
+	// METHODS
+
 	this.show = function (index) {
 		var parent = this.parent, config = this.config;
 		// if the popup doesn't exist
@@ -50,6 +54,7 @@ useful.Photowall.prototype.Details = function (parent) {
 			this.addImage(index);
 		}
 	};
+
 	this.addImage = function (index) {
 		var parent = this.parent, config = this.config,
 			popupWidth, popupHeight, popupAspect, imageSrc, imageSize, imageCaption,
@@ -83,8 +88,9 @@ useful.Photowall.prototype.Details = function (parent) {
 		// load the image
 		this.image.src = (config.slice) ?
 			config.slice.replace('{src}', imageSrc).replace('{size}', imageSize):
-			config.images.links[index];
+			imageSrc;
 	};
+
 	this.addCloser = function () {
 		var parent = this.parent, config = this.config, closer;
 		// build a close gadget
@@ -97,6 +103,7 @@ useful.Photowall.prototype.Details = function (parent) {
 		// add the close gadget to the image
 		this.popup.appendChild(closer);
 	};
+
 	this.addLocator = function (index) {
 		var parent = this.parent, config = this.config, locator;
 		// build the geo marker icon
@@ -109,6 +116,7 @@ useful.Photowall.prototype.Details = function (parent) {
 		// add the location marker to the image
 		this.popup.appendChild(locator);
 	};
+
 	this.zoomImage = function (coords) {
 		var config = this.config;
 		// apply the scaling
@@ -134,35 +142,39 @@ useful.Photowall.prototype.Details = function (parent) {
 		this.image.style.webkitTransform = scaling + ' ' + translation;
 		this.image.style.msTransform = scaling + ' ' + translation;
 	};
-	// event handlers
+
+	// EVENTS
+
 	this.onLocate = function (index) {
-		var _this = this, config = this.config;
+		var _this = this;
 		return function () {
-			// trigger the opened event if available
-			if (config.located) {
-				// catch the reply from the opened event
-				config.located(config.images.objects[index], config.images.links[index]);
-			}
+			var config = this.config;
+			// trigger the located event if available
+			if (config.located) { config.located(config.images.objects[index], config.images.links[index]); }
 		};
 	};
+
 	this.onDoubleTapped = function () {
 		var _this = this;
 		return function () {
+			var config = this.config;
 			_this.zoomImage({
-				'scale' : (_this.scaling[0] === 1) ? _this.config.zoom : -_this.config.zoom,
+				'scale' : (_this.scaling[0] === 1) ? config.zoom : -config.zoom,
 			});
 		};
 	};
+
 	this.onTransformed = function () {
 		var _this = this;
 		return function (coords) {
 			_this.zoomImage(coords);
 		};
 	};
+
 	this.onOpen = function () {
 		var _this = this;
 		return function () {
-			var image, parent = _this.parent, config = _this.config;
+			var image, parent = _this.parent;
 			// if there is a popup
 			if (_this.popup) {
 				// hide the busy indicator
@@ -175,6 +187,7 @@ useful.Photowall.prototype.Details = function (parent) {
 			}
 		};
 	};
+
 	this.onFail = function (index) {
 		var _this = this;
 		return function () {
@@ -190,13 +203,11 @@ useful.Photowall.prototype.Details = function (parent) {
 				_this.image = null;
 				_this.gestures = null;
 			}
-			// trigger the opened handler directly
-			if (config.located !== null) {
-				// catch the reply from the opened event
-				config.located(config.images.objects[index], config.images.links[index]);
-			}
+			// trigger the located handler directly
+			if (config.located !== null) { config.located(config.images.objects[index], config.images.links[index]); }
 		};
 	};
+
 	this.onClose = function () {
 		var _this = this;
 		return function () {
