@@ -23,7 +23,6 @@ useful.Photowall.prototype.Main = function (config, context) {
     // OBJECTS
 
     this.busy = new this.context.Busy(this);
-    this.details = new this.context.Details(this);
     this.thumbnails = new this.context.Thumbnails(this);
 
     // METHODS
@@ -61,23 +60,6 @@ useful.Photowall.prototype.Main = function (config, context) {
         // measure the container
         this.config.col = this.element.offsetWidth;
         this.config.aspect = this.config.height / this.config.col;
-    };
-
-    this.focus = function(index) {
-        // if the input is not a number
-        if (isNaN(index)) {
-            var a, b,
-                name = new RegExp(index, 'i'),
-                links = this.config.images.links;
-            // find the number that goes with this name
-            for (a = 0, b = links.length; a < b; a += 1) {
-                if (name.test(links[a].getAttribute('href'))) {
-                    index = a;
-                }
-            }
-        }
-        // open the popup by number
-        this.details.show(index);
     };
 
 };

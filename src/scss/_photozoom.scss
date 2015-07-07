@@ -1,0 +1,116 @@
+/*
+	example container style
+*/
+#photozoom {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	* {
+		@include box-sizing(border-box);
+		-ms-interpolation-mode: bicubic;
+	}
+	li {
+		display: inline;
+		margin: 0;
+		padding: 0;
+		img {
+			@include rems('margin', 0, 0, 0.33, 0);
+			display: inline-block;
+			height: 96px;
+			width: auto;
+			vertical-align: top;
+		}
+	}
+}
+/*
+	component styles
+*/
+.photozoom-popup {
+	@include transition(opacity ease 500ms);
+	-webkit-transition: -webkit-opacity ease 500ms;
+	background: rgba(0, 0, 0, 0.9);
+	background: #000\9;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	z-index: 20000;
+	&.photozoom-busy-fixed {
+		position: fixed;
+	}
+	* {
+		@include box-sizing(border-box);
+		-ms-interpolation-mode: bicubic;
+	}
+	.photozoom-caption {
+		display: none;
+	}
+	.photozoom-image {
+		z-index: 1;
+	}
+	.photozoom-closer {
+		@include iconParent(48);
+		@include rem('width', 3);
+		@include rem('height', 3);
+		@include rem('right', 1);
+		@include rem('top', 1);
+		background: $color-passive;
+		color: #fff;
+		cursor: pointer;
+		font-weight: bold;
+		position: absolute;
+		text-align: center;
+		text-decoration: none;
+		z-index: 2;
+		&:before {
+			@include iconCenter(24);
+			background-image: url(../img/photozoom.png);
+		}
+		&:hover {
+			background: $color-hover;
+		}
+	}
+	.photozoom-locator {
+		display : none;
+	}
+}
+.photozoom-popup-passive {
+	opacity: 0;
+	-webkit-opacity: 0;
+	visibility: hidden\9;
+}
+.photozoom-popup-active {
+	opacity: 1;
+	-webkit-opacity: 1;
+	visibility: visible\9;
+}
+/*
+	busy spinner
+*/
+.photozoom-busy {
+	border-radius: 5px;
+	opacity: 0.8;
+	-webkit-opacity: 0.8;
+	background: #000 url(../img/busy_8.gif) no-repeat 50% 50%;
+	height: 48px;
+	left: 50%;
+	margin: -24px;
+	position: absolute;
+	top: 50%;
+	width: 48px;
+	z-index: 20;
+	&.photozoom-busy-fixed {
+		position: fixed;
+	}
+}
+.photozoom-busy-passive {
+	visibility: hidden;
+}
+.photozoom-busy-active {
+	visibility: visible;
+}

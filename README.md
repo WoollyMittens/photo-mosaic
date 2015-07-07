@@ -60,16 +60,6 @@ var photowall = new useful.Photowall().init({
 
 **'closed' : {function}** - A function to call then an image is closed.
 
-## How to control the script
-
-### Focus
-
-```javascript
-photowall.focus(index);
-```
-
-Shows the detailed view of a specific thumbnail.
-
 ## How to build the script
 
 This project uses node.js from http://nodejs.org/

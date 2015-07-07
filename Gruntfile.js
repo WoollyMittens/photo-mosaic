@@ -1,17 +1,21 @@
 module.exports = function(grunt) {
 
 	// COMPONENTS
-	
+
 	var name = 'photowall';
 	var libs = [
 		'../useful-polyfills/src/js/useful-polyfills.js',
 		'../useful-gestures/src/js/useful-gestures.js',
 		'../useful-gestures/src/js/useful-gestures-main.js',
 		'../useful-gestures/src/js/useful-gestures-multi.js',
-		'../useful-gestures/src/js/useful-gestures-single.js'
+		'../useful-gestures/src/js/useful-gestures-single.js',
+		'../useful-photozoom/src/js/useful-photozoom-busy.js',
+		'../useful-photozoom/src/js/useful-photozoom-main.js',
+		'../useful-photozoom/src/js/useful-photozoom.js'
 	];
 	var mixins = [
-		'../useful/src/scss/_mixins.scss'
+		'../useful/src/scss/_mixins.scss',
+		'../useful-photozoom/src/scss/_photozoom.scss'
 	];
 
 	// CONFIGURATION
@@ -115,7 +119,7 @@ module.exports = function(grunt) {
 	grunt.initConfig(config);
 
 	// DEPENDENCIES
-	
+
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-compass');
@@ -127,7 +131,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 
 	// TASKS
-	
+
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('serve', ['connect', 'watch']);
 	grunt.registerTask('dev', ['compass', 'autoprefixer', 'concat']);

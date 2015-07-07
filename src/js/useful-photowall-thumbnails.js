@@ -87,30 +87,24 @@ useful.Photowall.prototype.Thumbnails = function (parent) {
 				currentRow = [];
 				subtotalWidth = 0;
 			}
-			// add an event handler to the link if there is one
-			if (hasLinks) { config.images.links[a].onclick = this.clicked(a); }
+		}
+		// add photoZoom events
+		if (hasLinks) {
+			config.photozoom = new useful.Photozoom().init({
+				'elements' : config.images.links,
+				'container' : document.body,
+				'zoom' : 2,
+				'sizer' : null,
+				'slicer' : this.config.slice,
+				'opened' : this.config.opened,
+				'located' : this.config.located,
+				'closed' : this.config.closed
+			});
 		}
 		// communicate the active state
 		parent.element.className = parent.element.className.replace('-passive', '-active');
 	};
 
-	this.clicked = function (index) {
-		var context = this;
-		return function (event) {
-			var parent = context.parent, config = context.parent.config, allowedToOpen;
-			// cancel the click
-			event.preventDefault();
-			// trigger the opened event if available
-			if (config.opened !== null) {
-				// catch the reply from the opened event
-				allowedToOpen = config.opened(config.images.objects[index], config.images.links[index]);
-			}
-			// open the popup, if there was no reply or a positive reply
-			if (typeof(allowedToOpen) === 'undefined' || allowedToOpen === null || allowedToOpen) {
-				parent.details.show(index);
-			}
-		};
-	};
 };
 
 // return as a require.js module
