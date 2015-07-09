@@ -14,16 +14,16 @@ useful.Photozoom = useful.Photozoom || function () {};
 useful.Photozoom.prototype.init = function (config) {
 
 	// PROPERTIES
-	
+
 	"use strict";
 
 	// METHODS
-	
+
 	this.only = function (config) {
 		// start an instance of the script
 		return new this.Main(config, this).init();
 	};
-	
+
 	this.each = function (config) {
 		var _config, _context = this, instances = [];
 		// for all element
@@ -32,8 +32,6 @@ useful.Photozoom.prototype.init = function (config) {
 			_config = Object.create(config);
 			// insert the current element
 			_config.element = config.elements[a];
-			// delete the list of elements from the clone
-			delete _config.elements;
 			// start a new instance of the object
 			instances[a] = new this.Main(_config, _context).init();
 		}

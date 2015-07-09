@@ -21,25 +21,26 @@ useful.Photozoom.prototype.Busy = function (container) {
 	// METHODS
 
 	this.init = function () {
-		// construct the spinner
-		this.spinner = document.createElement('div');
-		this.spinner.className = (this.container === document.body) ?
-			'photozoom-busy photozoom-busy-fixed photozoom-busy-passive':
-			'photozoom-busy photozoom-busy-passive';
-		this.container.appendChild(this.spinner);
-		// return the object
-		return this;
+		// not needed yet
 	};
 
 	this.show = function () {
-		// show the spinner
-		this.spinner.className = this.spinner.className.replace(/-passive/gi, '-active');
+		// construct the spinner
+		this.spinner = document.createElement('div');
+		this.spinner.className = (this.container === document.body) ?
+			'photozoom-busy photozoom-busy-fixed photozoom-busy-active':
+			'photozoom-busy photozoom-busy-active';
+		this.container.appendChild(this.spinner);
 	};
 
 	this.hide = function () {
-		// hide the spinner
-		this.spinner.className = this.spinner.className.replace(/-active/gi, '-passive');
+		// deconstruct the spinner
+		if (this.spinner) {
+			this.container.removeChild(this.spinner);
+			this.spinner = null;
+		}
 	};
+
 };
 
 // return as a require.js module

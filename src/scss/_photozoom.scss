@@ -1,5 +1,5 @@
 /*
-	example container style
+	Photo Zoom
 */
 #photozoom {
 	margin: 0;
@@ -51,6 +51,9 @@
 		display: none;
 	}
 	.photozoom-image {
+		@include transition(left ease 500ms);
+		position: relative;
+		left: 0%;
 		z-index: 1;
 	}
 	.photozoom-closer {
@@ -103,7 +106,7 @@
 	position: absolute;
 	top: 50%;
 	width: 48px;
-	z-index: 20;
+	z-index: 20001;
 	&.photozoom-busy-fixed {
 		position: fixed;
 	}
