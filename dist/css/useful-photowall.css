@@ -1,0 +1,318 @@
+/*
+Constants
+*/
+/*
+Hides text in the margin
+*/
+/*
+Turns a button into an icon
+*/
+/*
+Centres a graphic or glyph inside an icon
+*/
+/*
+Offers both the pixel and rem value of a single property
+*/
+/*
+Offers both the pixel and rem values of a shorthand property
+*/
+/*
+Offers the text size as both the pixel and rem value
+*/
+/*
+Adds vendor prefixed to a property
+*/
+/*
+Applies the "clearfix" hack to a container with floating content
+*/
+/*
+	Photo Zoom
+*/
+#photozoom {
+  margin: 0;
+  padding: 0;
+  position: relative; }
+  #photozoom * {
+    box-sizing: border-box;
+    -ms-interpolation-mode: bicubic; }
+  #photozoom li {
+    display: inline;
+    margin: 0;
+    padding: 0; }
+    #photozoom li img {
+      margin-top: 0px;
+      margin-top: 0rem;
+      margin-right: 0px;
+      margin-right: 0rem;
+      margin-bottom: 3.96px;
+      margin-bottom: 0.33rem;
+      margin-left: 0px;
+      margin-left: 0rem;
+      display: inline-block;
+      height: 96px;
+      width: auto;
+      vertical-align: top; }
+
+/*
+	component styles
+*/
+.photozoom-popup {
+  transition: opacity ease 500ms;
+  -webkit-transition: -webkit-opacity ease 500ms;
+  background: rgba(0, 0, 0, 0.9);
+  background: #000\9;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  z-index: 20000; }
+  .photozoom-popup.photozoom-busy-fixed {
+    position: fixed; }
+  .photozoom-popup * {
+    box-sizing: border-box;
+    -ms-interpolation-mode: bicubic; }
+  .photozoom-popup .photozoom-caption {
+    display: none; }
+  .photozoom-popup .photozoom-image {
+    transition: left ease 500ms;
+    position: relative;
+    left: 0%;
+    z-index: 1; }
+  .photozoom-popup .photozoom-closer {
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    text-indent: 58px;
+    white-space: nowrap;
+    /* Because of Internet Explorer 8 we can't have nice thing. */
+    overflow: visible;
+    text-indent: -999em;
+    width: 36px;
+    width: 3rem;
+    height: 36px;
+    height: 3rem;
+    right: 12px;
+    right: 1rem;
+    top: 12px;
+    top: 1rem;
+    background: #ff6a00;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    z-index: 2; }
+    .photozoom-popup .photozoom-closer:before {
+      content: "";
+      display: block;
+      font-family: FontAwesome;
+      font-size: 12px;
+      height: 24px;
+      line-height: 24px;
+      margin-left: -12px;
+      margin-top: -12px;
+      width: 24px;
+      position: absolute;
+      left: 50%;
+      text-align: center;
+      top: 50%;
+      background-image: url(../img/photozoom.png); }
+    .photozoom-popup .photozoom-closer:hover {
+      background: #ff9800; }
+  .photozoom-popup .photozoom-locator {
+    display: none; }
+
+.photozoom-popup-passive {
+  opacity: 0;
+  -webkit-opacity: 0;
+  visibility: hidden\9; }
+
+.photozoom-popup-active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  visibility: visible\9; }
+
+/*
+	busy spinner
+*/
+.photozoom-busy {
+  border-radius: 5px;
+  opacity: 0.8;
+  -webkit-opacity: 0.8;
+  background: #000 url(../img/busy_8.gif) no-repeat 50% 50%;
+  height: 48px;
+  left: 50%;
+  margin: -24px;
+  position: absolute;
+  top: 50%;
+  width: 48px;
+  z-index: 20001; }
+  .photozoom-busy.photozoom-busy-fixed {
+    position: fixed; }
+
+.photozoom-busy-passive {
+  visibility: hidden; }
+
+.photozoom-busy-active {
+  visibility: visible; }
+
+/*
+	component styles
+*/
+.photowall {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 320px;
+  /*
+		preload state
+	*/
+  /*
+		photowall bricks
+	*/
+  /*
+		photowall popup
+	*/
+  /*
+		busy spinner
+	*/ }
+  .photowall * {
+    box-sizing: border-box;
+    -ms-interpolation-mode: bicubic; }
+  .photowall.photowall-passive {
+    visibility: hidden; }
+  .photowall.photowall-active {
+    visibility: visible; }
+  .photowall .photowall-bricks {
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%; }
+    .photowall .photowall-bricks ul {
+      display: block;
+      margin: 0;
+      padding: 0;
+      width: 102%; }
+      .photowall .photowall-bricks ul li {
+        display: inline;
+        margin: 0;
+        padding: 0; }
+        .photowall .photowall-bricks ul li img {
+          display: inline-block;
+          height: 128px;
+          width: auto;
+          border: solid 1px #fff;
+          margin: 0 -2px -3px 0;
+          vertical-align: top; }
+  .photowall .photowall-detail {
+    transition: opacity ease 500ms;
+    background: rgba(0, 0, 0, 0.9);
+    background: #000\9;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    z-index: 20000; }
+    .photowall .photowall-detail .photowall-image {
+      z-index: 1; }
+    .photowall .photowall-detail .photowall-closer,
+    .photowall .photowall-detail .photowall-locator {
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+      text-indent: 58px;
+      white-space: nowrap;
+      /* Because of Internet Explorer 8 we can't have nice thing. */
+      overflow: visible;
+      text-indent: -999em;
+      width: 36px;
+      width: 3rem;
+      height: 36px;
+      height: 3rem;
+      right: 12px;
+      right: 1rem;
+      top: 12px;
+      top: 1rem;
+      background: #ff6a00;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      position: absolute;
+      text-align: center;
+      text-decoration: none;
+      z-index: 2; }
+      .photowall .photowall-detail .photowall-closer:before,
+      .photowall .photowall-detail .photowall-locator:before {
+        content: "";
+        display: block;
+        font-family: FontAwesome;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        margin-left: -12px;
+        margin-top: -12px;
+        width: 24px;
+        position: absolute;
+        left: 50%;
+        text-align: center;
+        top: 50%;
+        background-image: url(../img/photowall.png); }
+      .photowall .photowall-detail .photowall-closer:hover,
+      .photowall .photowall-detail .photowall-locator:hover {
+        background: #ff9800; }
+    .photowall .photowall-detail .photowall-locator {
+      visibility: hidden;
+      right: 60px;
+      right: 5rem; }
+      .photowall .photowall-detail .photowall-locator:before {
+        content: "";
+        display: block;
+        font-family: FontAwesome;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        margin-left: -12px;
+        margin-top: -12px;
+        width: 24px;
+        position: absolute;
+        left: 50%;
+        text-align: center;
+        top: 50%;
+        background-image: url(../img/marker-photo.png);
+        background-size: 24px 24px; }
+  .photowall .photowall-detail-maximise {
+    position: fixed; }
+  .photowall .photowall-detail-passive {
+    opacity: 0;
+    -webkit-opacity: 0;
+    visibility: hidden\9; }
+  .photowall .photowall-detail-active {
+    opacity: 1;
+    -webkit-opacity: 1;
+    visibility: visible\9; }
+  .photowall .photowall-busy {
+    border-radius: 5px;
+    opacity: 0.8;
+    -webkit-opacity: 0.8;
+    background: #000 url(../img/busy_8.gif) no-repeat 50% 50%;
+    height: 48px;
+    left: 50%;
+    margin: -24px;
+    position: absolute;
+    top: 50%;
+    width: 48px;
+    z-index: 20; }
+  .photowall .photowall-busy-passive {
+    visibility: hidden; }
+  .photowall .photowall-busy-active {
+    visibility: visible; }

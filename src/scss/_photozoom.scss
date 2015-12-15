@@ -6,7 +6,7 @@
 	padding: 0;
 	position: relative;
 	* {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		-ms-interpolation-mode: bicubic;
 	}
 	li {
@@ -26,7 +26,7 @@
 	component styles
 */
 .photozoom-popup {
-	@include transition(opacity ease 500ms);
+	transition: opacity ease 500ms;
 	-webkit-transition: -webkit-opacity ease 500ms;
 	background: rgba(0, 0, 0, 0.9);
 	background: #000\9;
@@ -44,14 +44,14 @@
 		position: fixed;
 	}
 	* {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		-ms-interpolation-mode: bicubic;
 	}
 	.photozoom-caption {
 		display: none;
 	}
 	.photozoom-image {
-		@include transition(left ease 500ms);
+		transition: left ease 500ms;
 		position: relative;
 		left: 0%;
 		z-index: 1;

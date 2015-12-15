@@ -35,7 +35,7 @@ var photowall = new useful.Photowall().init({
 	'orphans' : 0,
 	'maximise' : true,
 	'zoom' : 2,
-	'slice' : './php/imageslice.php?src=../{src}&{size}',
+	'slice' : 'php/imageslice.php?src=../{src}&{size}',
 	'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
 	'opened' : function (image, link) {},
 	'closed' : function () {}
@@ -64,15 +64,15 @@ var photowall = new useful.Photowall().init({
 
 This project uses node.js from http://nodejs.org/
 
-This project uses grunt.js from http://gruntjs.com/
+This project uses gulp.js from http://gulpjs.com/
 
 The following commands are available for development:
 + `npm install` - Installs the prerequisites.
-+ `grunt import` - Re-imports libraries from supporting projects to `./src/libs/` if available under the same folder tree.
-+ `grunt dev` - Builds the project for development purposes.
-+ `grunt prod` - Builds the project for deployment purposes.
-+ `grunt watch` - Continuously recompiles updated files during development sessions.
-+ `grunt serve` - Serves the project on a temporary web server at http://localhost:8000/ .
++ `gulp import` - Re-imports libraries from supporting projects to `./src/libs/` if available under the same folder tree.
++ `gulp dev` - Builds the project for development purposes.
++ `gulp prod` - Builds the project for deployment purposes.
++ `gulp watch` - Continuously recompiles updated files during development sessions.
++ `gulp serve` - Serves the project on a temporary web server at http://localhost:8000/ .
 
 ## License
 

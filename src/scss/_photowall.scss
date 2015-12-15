@@ -7,7 +7,7 @@
 	position : relative;
 	height : 320px;
 	* {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		-ms-interpolation-mode: bicubic;
 	}
 	/*
@@ -52,8 +52,7 @@
 		photowall popup
 	*/
 	.photowall-detail {
-		@include transition(opacity ease 500ms);
-		-webkit-transition : -webkit-opacity ease 500ms;
+		transition: opacity ease 500ms;
 		background : rgba(0, 0, 0, 0.9);
 		background : #000\9;
 		bottom : 0;
