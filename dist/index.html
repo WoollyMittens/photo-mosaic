@@ -32,45 +32,67 @@
 				<script src="./js/useful-photowall.js"></script>
 				<figure class="photowall" id="photowall">
 					<ul>
-						<li><a href="./img/photo_0a.jpg"><img alt="" src="./img/photo_0.jpg"/></a></li>
-						<li><a href="./img/photo_1a.jpg"><img alt="" src="./img/photo_1.jpg"/></a></li>
-						<li><a href="./img/photo_2a.jpg"><img alt="" src="./img/photo_2.jpg"/></a></li>
-						<li><a href="./img/photo_3a.jpg"><img alt="" src="./img/photo_3.jpg"/></a></li>
-						<li><a href="./img/photo_4a.jpg"><img alt="" src="./img/photo_4.jpg"/></a></li>
-						<li><a href="./img/photo_5a.jpg"><img alt="" src="./img/photo_5.jpg"/></a></li>
-						<li><a href="./img/photo_6a.jpg"><img alt="" src="./img/photo_6.jpg"/></a></li>
-						<li><a href="./img/photo_7a.jpg"><img alt="" src="./img/photo_7.jpg"/></a></li>
-						<li><a href="./img/photo_8a.jpg"><img alt="" src="./img/photo_8.jpg"/></a></li>
-						<li><a href="./img/photo_9a.jpg"><img alt="" src="./img/photo_9.jpg"/></a></li>
+						<li><a href="./img/photo_0a.jpg" class="zoom"><img alt="" src="./img/photo_0.jpg"/></a></li>
+						<li><a href="./img/photo_1a.jpg" class="zoom"><img alt="" src="./img/photo_1.jpg"/></a></li>
+						<li><a href="./img/photo_2a.jpg" class="zoom"><img alt="" src="./img/photo_2.jpg"/></a></li>
+						<li><a href="./img/118_r0012096.jpg" class="sphere"><img alt="" src="./img/118_r0012096_small.jpg"/></a></li>
+						<li><a href="./img/photo_3a.jpg" class="zoom"><img alt="" src="./img/photo_3.jpg"/></a></li>
+						<li><a href="./img/photo_4a.jpg" class="zoom"><img alt="" src="./img/photo_4.jpg"/></a></li>
+						<li><a href="./img/084_r0012077.jpg" class="sphere"><img alt="" src="./img/084_r0012077_small.jpg"/></a></li>
+						<li><a href="./img/photo_5a.jpg" class="zoom"><img alt="" src="./img/photo_5.jpg"/></a></li>
+						<li><a href="./img/photo_6a.jpg" class="zoom"><img alt="" src="./img/photo_6.jpg"/></a></li>
+						<li><a href="./img/photo_7a.jpg" class="zoom"><img alt="" src="./img/photo_7.jpg"/></a></li>
+						<li><a href="./img/075_r0012075.jpg" class="sphere"><img alt="" src="./img/075_r0012075_small.jpg"/></a></li>
+						<li><a href="./img/photo_8a.jpg" class="zoom"><img alt="" src="./img/photo_8.jpg"/></a></li>
+						<li><a href="./img/photo_9a.jpg" class="zoom"><img alt="" src="./img/photo_9.jpg"/></a></li>
 					</ul>
 				</figure>
 				<script>
 				//<!--
 					var photowall = new useful.Photowall().init({
 						// target element
-						'element' : document.getElementById('photowall'),
-						// average height of rows
-						'row' : 150,
-						// amount of orphaned thumbnails to allow on the last line
-						'orphans' : 0,
-						// use the maximum amount of screen space available for the photo
-						'maximise' : false,
-						// allow zooming in on the maximised images using gestures
-						'zoom' : 2,
-						// optional webservice for resizing images
-						'slice' : 'php/imageslice.php?src=../{src}&{size}',
-						// use pixels instead of percentages in emergencies
-						'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
-						// function to call when an image is opened
-						'opened' : function (image, link) { console.log('opened:', image); return true; },
-						// function to call when the locator icon is clicked
-						'located' : function (image, link) { console.log('located:', image); return true; },
-						// function to call then an image is closed
-						'closed' : function () { console.log('closed'); }
+						'element' : document.getElementById('photowall')
 					});
 				//-->
 				</script>
 				<!-- Cut above this -->
+
+				<!-- Combined with Photo Zoom -->
+				<style>@import url("../../useful-photozoom/dist/css/useful-photozoom.css");</style>
+				<script src="../../useful-photozoom/dist/js/useful-photozoom.js"></script>
+				<script>
+				//<!--
+					var photozooms = (useful.Photozoom) ? new useful.Photozoom().init({
+						// target elements
+						'elements' : document.querySelectorAll('#photowall a.zoom'),
+						// restrict the popup to a container
+						'container' : document.querySelector('#photowall'),
+						// zoom factor for the touch controls
+						'zoom' : 2,
+						// optional webservice for determining dimensions
+						'sizer' : 'php/imagesize.php?src=../{src}',
+						// optional webservice for acquiring sized images
+						'slicer' : 'php/imageslice.php?src=../{src}&{size}'
+					}) : null;
+				//-->
+				</script>
+
+				<!-- Combined with Photo Sphere -->
+				<style>@import url("../../useful-photosphere/dist/css/useful-photosphere.css");</style>
+				<script src="../../useful-photosphere/dist/js/useful-photosphere.js"></script>
+				<script>
+					// create a new instance of the script
+					var photospheres = (useful.Photosphere) ? new useful.Photosphere().init({
+						// target elements
+						'elements': document.querySelectorAll('#photowall a.sphere'),
+						// restrict the popup to a container
+						'container' : document.querySelector('#photowall'),
+						// optional webservice for acquiring sized images
+						'slicer' : 'php/imageslice.php?src=../{src}&{size}',
+						// rotation speed when idle
+						'idle': 0.002
+					}) : null;
+				</script>
 
 			</aside>
 		</section>

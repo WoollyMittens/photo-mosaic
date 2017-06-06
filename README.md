@@ -30,35 +30,11 @@ To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5
 
 ```javascript
 var photowall = new useful.Photowall().init({
-	'element' : document.getElementById('id'),
-	'row' : 150,
-	'orphans' : 0,
-	'maximise' : true,
-	'zoom' : 2,
-	'slice' : 'php/imageslice.php?src=../{src}&{size}',
-	'fallback' : navigator.userAgent.match(/msie 7|msie 6/gi),
-	'opened' : function (image, link) {},
-	'closed' : function () {}
+	'element' : document.getElementById('id')
 });
 ```
 
-**id : {string}** - The ID attribute of an element somewhere in the document.
-
-**'row' : {integer}** - Average height of rows in pixels.
-
-**'orphans' : {integer}** - Amount of orphaned thumbnails to allow on the last line.
-
-**'maximise' : {boolean}** - If true, creates a popup the size of the entire window for the photos.
-
-**'zoom' : {integer}** - The maximum zoom level of the popup.
-
-**'slice' : {string}** - Optional web-service for resizing images. An example is provided as *./php/imageslice.php*.
-
-**'fallback' : {boolean}** - Use pixels instead of percentages in emergencies.
-
-**'opened' : {function}** - A function to call when an image is opened. The image's and link's DOM objects are passed to it.
-
-**'closed' : {function}** - A function to call then an image is closed.
+**element : {DOM node}** - The target element of the script.
 
 ## How to build the script
 

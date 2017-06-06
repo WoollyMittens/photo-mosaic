@@ -8,63 +8,36 @@
 
 // create the constructor if needed
 var useful = useful || {};
-useful.Photowall = useful.Photowall || function () {};
+useful.Photowall = useful.Photowall || function() {};
 
 // extend the constructor
-useful.Photowall.prototype.Main = function (config, context) {
+useful.Photowall.prototype.Main = function(config, context) {
 
-    // PROPERTIES
+  // PROPERTIES
 
-    "use strict";
-    this.config = config;
-    this.context = context;
-    this.element = config.element;
+  "use strict";
+  this.config = config;
+  this.context = context;
+  this.element = config.element;
 
-    // OBJECTS
+  // METHODS
 
-    this.busy = new this.context.Busy(this);
-    this.thumbnails = new this.context.Thumbnails(this);
-
-    // METHODS
-
-    this.init = function() {
-        var _this = this;
-        // communicate the initial state
-        this.element.className += ' photowall-passive';
-        // store the images
-        this.config.images = {};
-        this.config.images.links = this.element.getElementsByTagName('a');
-        this.config.images.objects = this.element.getElementsByTagName('img');
-        // prepare the contents
-        this.prepare();
-        // construct the spinner
-        this.busy.build();
-        // check every once in a while to see if the image dimensions are known yet
-        this.config.wait = setInterval(function() {
-            if (_this.thumbnails.complete()) {
-                // cancel the checking
-                clearTimeout(_this.config.wait);
-                // measure the dimensions
-                _this.thumbnails.measure();
-                // construct the wall
-                _this.thumbnails.redraw();
-            }
-        }, 500);
-        // return the object
-        return this;
-    };
-
-    this.prepare = function() {
-        // remove the white space
-        this.element.innerHTML = '<div class="photowall-bricks">' + this.element.innerHTML.replace(/\t|\r|\n/g, '') + '</div>';
-        // measure the container
-        this.config.col = this.element.offsetWidth;
-        this.config.aspect = this.config.height / this.config.col;
-    };
+  this.init = function() {
+    // find all the links
+    var photos = this.element.getElementsByTagName('img');
+    // process all photos
+    for (var a = 0, b = photos.length; a < b; a += 1) {
+      // move the image to the tile's background
+      photos[a].style.visibility = 'hidden';
+      photos[a].parentNode.style.backgroundImage = "url('" + photos[a].getAttribute('src') + "')";
+    }
+    // return the object
+    return this;
+  };
 
 };
 
 // return as a require.js module
 if (typeof module !== 'undefined') {
-    exports = module.exports = useful.Photowall.Main;
+  exports = module.exports = useful.Photowall.Main;
 }

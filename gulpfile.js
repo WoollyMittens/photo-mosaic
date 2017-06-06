@@ -20,8 +20,6 @@ var gulp = require('gulp'),
 gulp.task('import', function () {
   gulp.src('../useful-polyfills/src/js/*.js', {base: '../useful-polyfills/src/js/'})
     .pipe(gulp.dest('src/lib/'));
-  gulp.src('../useful-gestures/src/js/*.js', {base: '../useful-gestures/src/js/'})
-    .pipe(gulp.dest('src/lib/'));
 });
 
 // server
@@ -68,9 +66,6 @@ gulp.task('markup', function () {
   gulp.src('src/php/**/*.php')
     .pipe(special())
     .pipe(gulp.dest('dist/php/'));
-  gulp.src('src/json/**/*.js')
-    .pipe(special())
-    .pipe(gulp.dest('dist/json/'));
 });
 
 gulp.task('assets', function () {
@@ -80,6 +75,10 @@ gulp.task('assets', function () {
     .pipe(gulp.dest('dist/tiles/'));
   gulp.src('src/fonts/*')
     .pipe(gulp.dest('dist/fonts/'));
+  gulp.src('src/json/**/*.js')
+    .pipe(gulp.dest('dist/json/'));
+  gulp.src('src/photos/**/*.jpg')
+    .pipe(gulp.dest('dist/photos/'));
 });
 
 gulp.task('images', function () {

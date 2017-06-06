@@ -23,7 +23,7 @@
 		{
 			// write the dimensions into a JSON reply
 			if(isset($callBack)) echo $callBack . '(';
-			echo '{x:[' . implode(',', $this->imageWidth) . '], y:[' . implode(',', $this->imageHeight) . ']}';
+			echo '{"x":[' . implode(',', $this->imageWidth) . '], "y":[' . implode(',', $this->imageHeight) . ']}';
 			if(isset($callBack)) echo ');';
 		}
 
