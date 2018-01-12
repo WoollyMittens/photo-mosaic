@@ -34,15 +34,15 @@
 					<ul>
 						<li><a href="./img/photo_0a.jpg" class="zoom"><img alt="" src="./img/photo_0.jpg"/></a></li>
 						<li><a href="./img/photo_1a.jpg" class="zoom"><img alt="" src="./img/photo_1.jpg"/></a></li>
-						<li><a href="./img/photo_2a.jpg" class="zoom"><img alt="" src="./img/photo_2.jpg"/></a></li>
-						<li><a href="./img/118_r0012096.jpg" class="sphere"><img alt="" src="./img/118_r0012096_small.jpg"/></a></li>
+						<li><a href="./img/photo_2a.jpg" class="cylinder"><img alt="" src="./img/photo_2.jpg"/></a></li>
+						<li><a href="./img/r0012096_fov360.jpg" class="cylinder"><img alt="" src="./img/r0012096_small.jpg"/></a></li>
 						<li><a href="./img/photo_3a.jpg" class="zoom"><img alt="" src="./img/photo_3.jpg"/></a></li>
 						<li><a href="./img/photo_4a.jpg" class="zoom"><img alt="" src="./img/photo_4.jpg"/></a></li>
-						<li><a href="./img/084_r0012077.jpg" class="sphere"><img alt="" src="./img/084_r0012077_small.jpg"/></a></li>
+						<li><a href="./img/r0012077_fov360.jpg" class="sphere"><img alt="" src="./img/r0012077_small.jpg"/></a></li>
 						<li><a href="./img/photo_5a.jpg" class="zoom"><img alt="" src="./img/photo_5.jpg"/></a></li>
 						<li><a href="./img/photo_6a.jpg" class="zoom"><img alt="" src="./img/photo_6.jpg"/></a></li>
 						<li><a href="./img/photo_7a.jpg" class="zoom"><img alt="" src="./img/photo_7.jpg"/></a></li>
-						<li><a href="./img/075_r0012075.jpg" class="sphere"><img alt="" src="./img/075_r0012075_small.jpg"/></a></li>
+						<li><a href="./img/r0012075_fov360.jpg" class="sphere"><img alt="" src="./img/r0012075_small.jpg"/></a></li>
 						<li><a href="./img/photo_8a.jpg" class="zoom"><img alt="" src="./img/photo_8.jpg"/></a></li>
 						<li><a href="./img/photo_9a.jpg" class="zoom"><img alt="" src="./img/photo_9.jpg"/></a></li>
 					</ul>
@@ -77,6 +77,27 @@
 				//-->
 				</script>
 
+				<!-- Combined with Photo Cylinder -->
+				<style>@import url("useful-photocylinder/dist/css/useful-photocylinder.css");</style>
+				<script src="useful-photocylinder/dist/js/useful-photocylinder.js"></script>
+				<script>
+					// create a new instance of the script
+					var photocylinders = (useful.Photocylinder) ? new useful.Photocylinder().init({
+						// target elements
+						'elements': document.querySelectorAll('#photowall a.cylinder'),
+						// restrict the popup to a container
+						'container' : document.querySelector('#photowall'),
+						// file name check for spherical projections
+						'spherical': /fov360/i,
+						// file name check for cylindrical projections
+			      		'cylindrical': /fov180/i,
+						// optional webservice for acquiring sized images
+						'slicer' : 'php/imageslice.php?src=../{src}&{size}',
+						// rotation speed when idle
+						'idle': 0.1
+					}) : null;
+				</script>
+
 				<!-- Combined with Photo Sphere -->
 				<style>@import url("useful-photosphere/dist/css/useful-photosphere.css");</style>
 				<script src="useful-photosphere/dist/js/useful-photosphere.js"></script>
@@ -90,7 +111,7 @@
 						// optional webservice for acquiring sized images
 						'slicer' : 'php/imageslice.php?src=../{src}&{size}',
 						// rotation speed when idle
-						'idle': 0.002
+						'idle': 0.1
 					}) : null;
 				</script>
 
