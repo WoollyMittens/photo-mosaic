@@ -9,27 +9,19 @@ Try the <a href="http://www.woollymittens.nl/default.php?url=useful-photowall">d
 The stylesheet is best included in the header of the document.
 
 ```html
-<link rel="stylesheet" href="./css/useful-photowall.css"/>
+<link rel="stylesheet" href="./css/photowall.css"/>
 ```
 
 This include can be added to the header or placed inline before the script is invoked.
 
 ```html
-<script src="./js/useful-photowall.js"></script>
-```
-
-To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5.js*.
-
-```html
-<!--[if lte IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+<script src="./js/photowall.js"></script>
 ```
 
 ## How to start the script
 
 ```javascript
-var photowall = new useful.Photowall().init({
+var photowall = new Photowall({
 	'element' : document.getElementById('id')
 });
 ```

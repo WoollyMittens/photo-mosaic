@@ -425,7 +425,7 @@ var useful = useful || {};
 
 /*
 	Source:
-	van Creij, Maurice (2014). "useful.photowall.js: Simple photo wall", version 20141127, http://www.woollymittens.nl/.
+	van Creij, Maurice (2018). "photowall.js: Simple photo wall", version 20141127, http://www.woollymittens.nl/.
 
 	License:
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
@@ -433,14 +433,45 @@ var useful = useful || {};
 
 // create the constructor if needed
 var useful = useful || {};
-useful.Photowall = useful.Photowall || function() {};
+useful.Photowall = useful.Photowall || function () {};
 
-// extend the constructor
-useful.Photowall.prototype.Main = function(config, context) {
+// establish the class
+var Photowall = function (config) {
+
+		this.only = function (config) {
+			// start an instance of the script
+			return new this.Main(config, this).init();
+		};
+
+		this.each = function (config) {
+			var _config, _context = this, instances = [];
+			// for all element
+			for (var a = 0, b = config.elements.length; a < b; a += 1) {
+				// clone the configuration
+				_config = Object.create(config);
+				// insert the current element
+				_config.element = config.elements[a];
+				// start a new instance of the object
+				instances[a] = new this.Main(_config, _context);
+			}
+			// return the instances
+			return instances;
+		};
+
+		return (config.elements) ? this.each(config) : this.only(config);
+
+};
+
+// return as a require.js module
+if (typeof module !== 'undefined') {
+	exports = module.exports = Photowall;
+}
+
+// extend the class
+Photowall.prototype.Main = function(config, context) {
 
   // PROPERTIES
 
-  "use strict";
   this.config = config;
   this.context = context;
   this.element = config.element;
@@ -460,63 +491,6 @@ useful.Photowall.prototype.Main = function(config, context) {
     return this;
   };
 
-};
-
-// return as a require.js module
-if (typeof module !== 'undefined') {
-  exports = module.exports = useful.Photowall.Main;
-}
-
-/*
-	Source:
-	van Creij, Maurice (2014). "useful.photowall.js: Simple photo wall", version 20141127, http://www.woollymittens.nl/.
-
-	License:
-	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
-*/
-
-// create the constructor if needed
-var useful = useful || {};
-useful.Photowall = useful.Photowall || function () {};
-
-// extend the constructor
-useful.Photowall.prototype.init = function (config) {
-
-	// PROPERTIES
-
-	"use strict";
-
-	// METHODS
-
-	this.only = function (config) {
-		// start an instance of the script
-		return new this.Main(config, this).init();
-	};
-
-	this.each = function (config) {
-		var _config, _context = this, instances = [];
-		// for all element
-		for (var a = 0, b = config.elements.length; a < b; a += 1) {
-			// clone the configuration
-			_config = Object.create(config);
-			// insert the current element
-			_config.element = config.elements[a];
-			// delete the list of elements from the clone
-			delete _config.elements;
-			// start a new instance of the object
-			instances[a] = new this.Main(_config, _context).init();
-		}
-		// return the instances
-		return instances;
-	};
-
-	// START
-
-	return (config.elements) ? this.each(config) : this.only(config);
+  this.init();
 
 };
-
-// return as a require.js module
-if (typeof module !== 'undefined') {
-	exports = module.exports = useful.Photowall;
-}

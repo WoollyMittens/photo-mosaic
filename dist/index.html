@@ -28,8 +28,8 @@
 			<aside>
 
 				<!-- Cut below this -->
-				<style>@import url("./css/useful-photowall.css");</style>
-				<script src="./js/useful-photowall.js"></script>
+				<style>@import url("./css/photowall.css");</style>
+				<script src="./js/photowall.js"></script>
 				<figure class="photowall" id="photowall">
 					<ul>
 						<li><a href="./img/photo_0a.jpg" class="zoom"><img alt="" src="./img/photo_0.jpg"/></a></li>
@@ -49,7 +49,7 @@
 				</figure>
 				<script>
 				//<!--
-					var photowall = new useful.Photowall().init({
+					var photowall = new Photowall({
 						// target element
 						'element' : document.getElementById('photowall')
 					});
@@ -58,11 +58,11 @@
 				<!-- Cut above this -->
 
 				<!-- Combined with Photo Zoom -->
-				<style>@import url("useful-photozoom/dist/css/useful-photozoom.css");</style>
-				<script src="useful-photozoom/dist/js/useful-photozoom.js"></script>
+				<style>@import url("useful-photozoom/dist/css/photozoom.css");</style>
+				<script src="useful-photozoom/dist/js/photozoom.js"></script>
 				<script>
 				//<!--
-					var photozooms = (useful.Photozoom) ? new useful.Photozoom().init({
+					var photozooms = (Photozoom) ? new Photozoom({
 						// target elements
 						'elements' : document.querySelectorAll('#photowall a.zoom'),
 						// restrict the popup to a container
@@ -78,11 +78,11 @@
 				</script>
 
 				<!-- Combined with Photo Cylinder -->
-				<style>@import url("useful-photocylinder/dist/css/useful-photocylinder.css");</style>
-				<script src="useful-photocylinder/dist/js/useful-photocylinder.js"></script>
+				<style>@import url("useful-photocylinder/dist/css/photocylinder.css");</style>
+				<script src="useful-photocylinder/dist/js/photocylinder.js"></script>
 				<script>
 					// create a new instance of the script
-					var photocylinders = (useful.Photocylinder) ? new useful.Photocylinder().init({
+					var photocylinders = (Photocylinder) ? new Photocylinder({
 						// target elements
 						'elements': document.querySelectorAll('#photowall a.cylinder'),
 						// restrict the popup to a container
@@ -90,7 +90,7 @@
 						// file name check for spherical projections
 						'spherical': /fov360/i,
 						// file name check for cylindrical projections
-			      		'cylindrical': /fov180/i,
+			      'cylindrical': /fov180/i,
 						// optional webservice for acquiring sized images
 						'slicer' : 'php/imageslice.php?src=../{src}&{size}',
 						// rotation speed when idle
@@ -99,11 +99,11 @@
 				</script>
 
 				<!-- Combined with Photo Sphere -->
-				<style>@import url("useful-photosphere/dist/css/useful-photosphere.css");</style>
-				<script src="useful-photosphere/dist/js/useful-photosphere.js"></script>
+				<style>@import url("useful-photosphere/dist/css/photosphere.css");</style>
+				<script src="useful-photosphere/dist/js/photosphere.js"></script>
 				<script>
 					// create a new instance of the script
-					var photospheres = (useful.Photosphere) ? new useful.Photosphere().init({
+					var photospheres = (Photosphere) ? new Photosphere({
 						// target elements
 						'elements': document.querySelectorAll('#photowall a.sphere'),
 						// restrict the popup to a container
