@@ -1,21 +1,17 @@
 /*
 	Source:
-	van Creij, Maurice (2018). "photowall.js: Simple photo wall", version 20141127, http://www.woollymittens.nl/.
+	van Creij, Maurice (2018). "photowall.js: Simple photo wall", http://www.woollymittens.nl/.
 
 	License:
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
-
-// create the constructor if needed
-var useful = useful || {};
-useful.Photowall = useful.Photowall || function () {};
 
 // establish the class
 var Photowall = function (config) {
 
 		this.only = function (config) {
 			// start an instance of the script
-			return new this.Main(config, this).init();
+			return new this.Main(config, this);
 		};
 
 		this.each = function (config) {

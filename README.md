@@ -1,4 +1,4 @@
-# useful.photowall.js: Photo Wall
+# photowall.js: Photo Wall
 
 The script arranges collections of images into a brick pattern.
 
