@@ -34,9 +34,8 @@ var Photowall = function (config) {
 };
 
 // return as a require.js module
-if (typeof module !== 'undefined') {
-	exports = module.exports = Photowall;
-}
+if (typeof define != 'undefined') define([], function () { return Photowall });
+if (typeof module != 'undefined') module.exports = Photowall;
 
 // extend the class
 Photowall.prototype.Main = function(config, context) {

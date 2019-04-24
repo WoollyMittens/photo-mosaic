@@ -17,6 +17,19 @@ This include can be added to the header or placed inline before the script is in
 ```html
 <script src="./js/photowall.js"></script>
 ```
+Or use [Require.js](https://requirejs.org/).
+
+```js
+requirejs(['js/photowall.js'], function(ImageFallback) {
+	...
+});
+```
+
+Or import into an MVC framework.
+
+```js
+var Photowall = require('js/photowall.js');
+```
 
 ## How to start the script
 
