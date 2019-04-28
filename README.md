@@ -9,18 +9,20 @@ Try the <a href="http://www.woollymittens.nl/default.php?url=useful-photowall">d
 The stylesheet is best included in the header of the document.
 
 ```html
-<link rel="stylesheet" href="./css/photowall.css"/>
+<link rel="stylesheet" href="css/photowall.css"/>
 ```
 
 This include can be added to the header or placed inline before the script is invoked.
 
 ```html
-<script src="./js/photowall.js"></script>
+<script src="js/photowall.js"></script>
 ```
 Or use [Require.js](https://requirejs.org/).
 
 ```js
-requirejs(['js/photowall.js'], function(ImageFallback) {
+requirejs([
+	'js/photowall.js'
+], function(Photowall) {
 	...
 });
 ```
