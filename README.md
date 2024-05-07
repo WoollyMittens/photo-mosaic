@@ -1,8 +1,8 @@
-# photowall.js: Photo Wall
+# Photo Wall
 
-*DEPRICATION WARNING: the functionality in this script has been superceeded / trivialised by updated web standards.*
+The flex layout arranges collections of images into a brick pattern.
 
-The script arranges collections of images into a brick pattern.
+Due to additions to the web-standards, scripting is no longer required.
 
 ## Example
 
@@ -10,42 +10,11 @@ https://woollymittens.github.io/photo-mosaic/
 
 ## How to include the script
 
-The stylesheet is best included in the header of the document.
+The stylesheet is added to the header of the document.
 
 ```html
-<link rel="stylesheet" href="css/photowall.css"/>
+<link rel="stylesheet" href="./css/photowall.css"/>
 ```
-
-This include can be added to the header or placed inline before the script is invoked.
-
-```html
-<script src="js/photowall.js"></script>
-```
-Or use [Require.js](https://requirejs.org/).
-
-```js
-requirejs([
-	'js/photowall.js'
-], function(Photowall) {
-	...
-});
-```
-
-Or use imported as a component in existing projects.
-
-```js
-@import {Photowall} from "js/photowall.js";
-```
-
-## How to start the script
-
-```javascript
-var photowall = new Photowall({
-	'element' : document.getElementById('id')
-});
-```
-
-**element : {DOM node}** - The target element of the script.
 
 ## License
 
