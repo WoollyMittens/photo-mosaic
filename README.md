@@ -4,6 +4,10 @@
 
 The script arranges collections of images into a brick pattern.
 
+## Example
+
+https://woollymittens.github.io/photo-mosaic/
+
 ## How to include the script
 
 The stylesheet is best included in the header of the document.
