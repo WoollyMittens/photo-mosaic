@@ -8,12 +8,17 @@ Due to additions to the web-standards, scripting is no longer required.
 
 https://woollymittens.github.io/photo-mosaic/
 
-## How to include the script
-
-The stylesheet is added to the header of the document.
+## Implementation
 
 ```html
-<link rel="stylesheet" href="./css/photowall.css"/>
+<link rel="stylesheet" href="./css/photo-mosaic.css"/>
+...
+<figure class="photo-mosaic">
+	<a href="img/photo_0a.jpg"><img alt="" src="./img/photo_0.jpg"/></a>
+	<a href="img/photo_1a.jpg"><img alt="" src="./img/photo_1.jpg"/></a>
+	<a href="img/photo_2a.jpg"><img alt="" src="./img/photo_2.jpg"/></a>
+	...
+</figure>
 ```
 
 ## License

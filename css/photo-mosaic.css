@@ -1,0 +1,29 @@
+.photo-mosaic {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  background: black;
+  border: solid 1px black;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  a {
+    flex: 1 1 auto;
+    display: block;
+    border: solid 1px black;
+  }
+  
+  img {
+    height: 128px;
+    width: 100%;
+    object-fit: cover;
+    vertical-align: top;
+  }
+  
+}
+
