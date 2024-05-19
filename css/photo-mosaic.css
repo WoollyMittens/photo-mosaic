@@ -22,6 +22,7 @@
     height: 128px;
     width: 100%;
     object-fit: cover;
+    object-position: center;
     vertical-align: top;
   }
   
